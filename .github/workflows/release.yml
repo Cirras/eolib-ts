@@ -1,0 +1,51 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - v*
+
+concurrency:
+  group: release
+
+jobs:
+  publish-npm:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          registry-url: "https://registry.npmjs.org"
+          cache: npm
+      - name: Publish package
+        run: |
+          npm ci
+          npm publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+  publish-github:
+    needs: publish-npm
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Get version from tag
+        id: get-version
+        uses: battila7/get-version-action@v2
+      - name: Parse Changelog
+        id: changelog
+        uses: coditory/changelog-parser@v1
+        with:
+          version: ${{ steps.get-version.outputs.version-without-v }}
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: EOLib v${{steps.changelog.outputs.version}}
+          body: ${{ steps.changelog.outputs.description }}
