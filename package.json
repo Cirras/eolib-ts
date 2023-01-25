@@ -20,10 +20,11 @@
     "lib/**/*"
   ],
   "scripts": {
-    "clean": "rm -rf ./lib",
+    "clean": "rm -rf ./lib && rm -rf ./generated",
     "dist": "npm run clean && npm run dist:esm && npm run dist:cjs",
-    "dist:esm": "tsc -p ./config/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
-    "dist:cjs": "tsc -p ./config/tsconfig.cjs.json",
+    "dist:esm": "npm run generate && tsc -p ./config/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
+    "dist:cjs": "npm run generate && tsc -p ./config/tsconfig.cjs.json",
+    "generate": "ts-node scripts/generate-protocol-code.ts",
     "test": "mocha",
     "prepack": "npm run dist",
     "format": "pretty-quick",

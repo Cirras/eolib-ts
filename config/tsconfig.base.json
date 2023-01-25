@@ -1,4 +1,5 @@
 {
   "extends": "../tsconfig.json",
-  "include": ["../src/**", "../generated-src/**"]
+  "include": ["../src/**", "../generated/**"],
+  "rootDirs": ["../src", "../generated"]
 }
