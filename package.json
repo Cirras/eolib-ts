@@ -46,9 +46,11 @@
   },
   "homepage": "https://github.com/cirras/eolib-ts",
   "devDependencies": {
+    "@rgrove/parse-xml": "^4.0.1",
     "@types/chai": "^4.3.3",
     "@types/mocha": "^9.1.1",
     "chai": "^4.3.6",
+    "chalk": "^4.1.1",
     "husky": "^8.0.1",
     "keep-a-changelog": "^2.1.0",
     "mocha": "^10.0.0",
