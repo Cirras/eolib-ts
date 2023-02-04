@@ -47,5 +47,5 @@ jobs:
       - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-          name: EOLib v${{steps.changelog.outputs.version}}
+          name: v${{steps.changelog.outputs.version}}
           body: ${{ steps.changelog.outputs.description }}
