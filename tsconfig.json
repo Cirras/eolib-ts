@@ -2,7 +2,8 @@
   "include": ["src/**/*", "generated/**/*"],
   "rootDirs": ["src", "generated"],
   "compilerOptions": {
-    "target": "ESNext",
+    "lib": ["ES6", "DOM"],
+    "target": "ES6",
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "strict": true,
