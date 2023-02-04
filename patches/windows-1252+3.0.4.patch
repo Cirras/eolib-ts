@@ -1,0 +1,31 @@
+diff --git a/node_modules/windows-1252/package.json b/node_modules/windows-1252/package.json
+index 0c69730..624daec 100644
+--- a/node_modules/windows-1252/package.json
++++ b/node_modules/windows-1252/package.json
+@@ -3,7 +3,7 @@
+ 	"version": "3.0.4",
+ 	"description": "A robust windows-1252 encoder/decoder written in JavaScript.",
+ 	"homepage": "https://mths.be/windows-1252",
+-	"exports": "./windows-1252.mjs",
++	"main": "./windows-1252.mjs",
+ 	"keywords": [
+ 		"codec",
+ 		"decoder",
+diff --git a/node_modules/windows-1252/windows-1252.d.ts b/node_modules/windows-1252/windows-1252.d.ts
+index beab8fc..43d05ee 100644
+--- a/node_modules/windows-1252/windows-1252.d.ts
++++ b/node_modules/windows-1252/windows-1252.d.ts
+@@ -6,11 +6,11 @@ declare module 'windows-1252' {
+     mode: 'fatal' | 'replacement';
+   };
+ 
+-  export declare function encode(
++  export function encode(
+     text: string,
+     options?: EncodeOptions
+   ): Uint16Array;
+-  export declare function decode(
++  export function decode(
+     buffer: Uint16Array | Uint8Array | Buffer | string,
+     options?: DecodeOptions
+   ): string;
