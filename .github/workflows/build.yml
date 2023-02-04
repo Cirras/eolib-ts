@@ -26,5 +26,5 @@ jobs:
       - name: Build
         run: |
           npm ci
-          npm run dist
+          npm run build
           npm test

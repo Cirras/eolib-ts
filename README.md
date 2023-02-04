@@ -34,11 +34,11 @@ Utilities:
 
 ## Available Commands
 
-| Command            | Description                                |
-| ------------------ | ------------------------------------------ |
-| `npm install`      | Install project dependencies               |
-| `npm run dist`     | Build cjs and esm with production settings |
-| `npm run dist:cjs` | Build cjs with production settings         |
-| `npm run dist:esm` | Build esm with production settings         |
-| `npm run format`   | Format changed files using Prettier        |
-| `npm test`         | Run unit tests                             |
+| Command             | Description                                |
+| ------------------- | ------------------------------------------ |
+| `npm install`       | Install project dependencies               |
+| `npm run build`     | Build cjs and esm with production settings |
+| `npm run build:cjs` | Build cjs with production settings         |
+| `npm run build:esm` | Build esm with production settings         |
+| `npm run format`    | Format changed files using Prettier        |
+| `npm test`          | Run unit tests                             |
