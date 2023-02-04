@@ -34,11 +34,13 @@ Utilities:
 
 ## Available Commands
 
-| Command             | Description                                |
-| ------------------- | ------------------------------------------ |
-| `npm install`       | Install project dependencies               |
-| `npm run build`     | Build cjs and esm with production settings |
-| `npm run build:cjs` | Build cjs with production settings         |
-| `npm run build:esm` | Build esm with production settings         |
-| `npm run format`    | Format changed files using Prettier        |
-| `npm test`          | Run unit tests                             |
+| Command                 | Description                                                                 |
+| ----------------------- | --------------------------------------------------------------------------- |
+| `npm install`           | Install project dependencies                                                |
+| `npm run format`        | Format changed files using Prettier                                         |
+| `npm run generate`      | Generate code based on [eo-protocol](https://github.com/Cirras/eo-protocol) |
+| `npm run build`         | Build cjs and esm with production settings                                  |
+| `npm run build:cjs`     | Build cjs with production settings                                          |
+| `npm run build:esm`     | Build esm with production settings                                          |
+| `npm test`              | Run unit tests                                                              |
+| `npm run test:coverage` | Run unit tests with coverage                                                |
