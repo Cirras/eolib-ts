@@ -5,17 +5,17 @@
   "exports": {
     ".": {
       "import": {
-        "types": "./lib/esm/types/index.d.ts",
-        "default": "./lib/esm/index.mjs"
+        "types": "./lib/esm/types/src/index.d.ts",
+        "default": "./lib/esm/src/index.mjs"
       },
       "require": {
-        "types": "./lib/cjs/types/index.d.ts",
-        "default": "./lib/cjs/index.js"
+        "types": "./lib/cjs/types/src/index.d.ts",
+        "default": "./lib/cjs/src/index.js"
       }
     }
   },
-  "types": "./lib/cjs/types/index.d.ts",
-  "main": "./lib/cjs/index.js",
+  "types": "./lib/cjs/types/src/index.d.ts",
+  "main": "./lib/cjs/src/index.js",
   "files": [
     "lib/**/*"
   ],

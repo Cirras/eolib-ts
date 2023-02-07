@@ -23,6 +23,7 @@ export class ProtocolCodeGenerator {
   private inputRoot: string;
   private outputRoot: string;
   private protocolFiles: XmlElement[];
+  private exports: string[];
   private packetPaths: Map<XmlElement, string>;
   private typeFactory: TypeFactory;
 
@@ -30,6 +31,7 @@ export class ProtocolCodeGenerator {
     this.inputRoot = inputRoot;
     this.outputRoot = null;
     this.protocolFiles = [];
+    this.exports = [];
     this.packetPaths = new Map();
     this.typeFactory = new TypeFactory();
   }
@@ -38,8 +40,11 @@ export class ProtocolCodeGenerator {
     try {
       this.indexProtocolFiles();
       this.generateSourceFiles();
+      this.generateIndex();
     } finally {
       this.protocolFiles.length = 0;
+      this.exports.length = 0;
+      this.packetPaths.clear();
       this.typeFactory.clear();
     }
   }
@@ -181,13 +186,13 @@ export class ProtocolCodeGenerator {
 
     codeBlock.unindent().addLine("}");
 
-    return new TSFile(
-      path.posix.join(
-        type.sourcePath,
-        `${pascalCaseToKebabCase(type.name)}.ts`
-      ),
-      codeBlock
+    const relativePath = path.posix.join(
+      type.sourcePath,
+      pascalCaseToKebabCase(type.name)
     );
+    this.exports.push(relativePath);
+
+    return new TSFile(relativePath + ".ts", codeBlock);
   }
 
   private generateStruct(protocolStruct: XmlElement): TSFile {
@@ -207,11 +212,14 @@ export class ProtocolCodeGenerator {
       objectCodeGenerator
     );
 
+    const relativePath = path.posix.join(
+      type.sourcePath,
+      pascalCaseToKebabCase(type.name)
+    );
+    this.exports.push(relativePath);
+
     return new TSFile(
-      path.posix.join(
-        type.sourcePath,
-        `${pascalCaseToKebabCase(type.name)}.ts`
-      ),
+      relativePath + ".ts",
       new CodeBlock()
         .addCodeBlock(generateTsDoc(getComment(protocolStruct)))
         .addCodeBlock(objectCodeGenerator.code)
@@ -323,11 +331,14 @@ export class ProtocolCodeGenerator {
         .addLine("}")
     );
 
+    const relativePath = path.posix.join(
+      sourcePath,
+      pascalCaseToKebabCase(packetTypeName)
+    );
+    this.exports.push(relativePath);
+
     return new TSFile(
-      path.posix.join(
-        sourcePath,
-        `${pascalCaseToKebabCase(packetTypeName)}.ts`
-      ),
+      relativePath + ".ts",
       new CodeBlock()
         .addCodeBlock(generateTsDoc(getComment(protocolPacket)))
         .addCodeBlock(objectCodeGenerator.code)
@@ -343,5 +354,16 @@ export class ProtocolCodeGenerator {
       default:
         throw new Error(`Cannot create packet name suffix for path ${path}`);
     }
+  }
+
+  private generateIndex() {
+    const codeBlock = new CodeBlock();
+    this.exports.forEach((relativePath) => {
+      codeBlock.addLine(
+        `export * from "${path.posix.join("@eolib", relativePath)}"`
+      );
+    });
+    const generatedIndex = new TSFile("protocol/generated-index.ts", codeBlock);
+    generatedIndex.write(this.outputRoot);
   }
 }
