@@ -125,7 +125,7 @@ describe("flipMsb()", function () {
   ];
 
   TEST_DATA.forEach((data) => {
-    it(`should interleave "${data.input}" to "${data.flipped}"`, function () {
+    it(`should flip "${data.input}" to "${data.flipped}"`, function () {
       const bytes = toBytes(data.input);
       flipMsb(bytes);
       expect(bytes).toStrictEqual(toBytes(data.flipped));
@@ -155,7 +155,10 @@ describe("swapMultiples()", function () {
       input: 'Öxxö Xööx "Lëïth Säë" - "Ÿ"',
       swapped: 'Ööxx Xxöö "Lëïth Säë" - "Ÿ"',
     },
-    { input: "Padded with 0xFFÿÿÿÿÿÿÿÿ", swapped: "Padded with x0FFÿÿÿÿÿÿÿÿ" },
+    {
+      input: "Padded with 0xFFÿÿÿÿÿÿÿÿ",
+      swapped: "Padded with x0FFÿÿÿÿÿÿÿÿ",
+    },
     {
       input: "This string contains NUL\0 (value 0) and a € (value 128)",
       swapped: "This stirng ocntains NUL\0 (vaule 0) and a € (vaule 128)",
@@ -163,11 +166,23 @@ describe("swapMultiples()", function () {
   ];
 
   TEST_DATA.forEach((data) => {
-    it(`should interleave "${data.input}" to "${data.swapped}"`, function () {
+    it(`should swap "${data.input}" to "${data.swapped}" with multiple 3`, function () {
       const bytes = toBytes(data.input);
       swapMultiples(bytes, 3);
       expect(bytes).toStrictEqual(toBytes(data.swapped));
     });
+  });
+
+  TEST_DATA.forEach((data) => {
+    it(`should not swap "${data.input}" with multiple 0`, function () {
+      const bytes = toBytes(data.input);
+      swapMultiples(bytes, 0);
+      expect(bytes).toStrictEqual(toBytes(data.input));
+    });
+  });
+
+  it(`should throw when a negative multiple is provided`, function () {
+    expect(() => swapMultiples(new Uint8Array([1, 2, 3, 4, 5]), -1)).toThrow();
   });
 });
 
