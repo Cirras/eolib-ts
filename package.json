@@ -28,6 +28,7 @@
     "generate": "ts-node scripts/generate-protocol-code.ts",
     "test": "jest --verbose",
     "test:coverage": "jest --verbose --coverage",
+    "docs": "typedoc",
     "prepack": "npm run build",
     "prepare": "husky install",
     "pre-commit": "pretty-quick --staged",
@@ -62,6 +63,8 @@
     "ts-node": "^10.9.1",
     "tsc-alias": "^1.8.2",
     "tsconfig-paths": "^4.1.2",
+    "typedoc": "^0.23.24",
+    "typedoc-plugin-versions": "^0.2.3",
     "typescript": "^4.9.5"
   },
   "dependencies": {

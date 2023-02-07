@@ -1,0 +1,84 @@
+name: Docs
+
+on:
+  push:
+    tags:
+      - v*
+
+concurrency:
+  group: docs
+
+jobs:
+  get_history:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+      - name: Archive existing docs
+        run: |
+          mkdir -p ./docs
+          tar -cvf documentation.tar ./docs
+      - name: Upload existing docs artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: documentation
+          path: documentation.tar
+
+  generate:
+    needs: get_history
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+          submodules: true
+      - run: mkdir -p ./docs
+      - name: Download existing docs artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: documentation
+      - name: Extract existing docs
+        run: tar -xf documentation.tar ./docs -C ./docs
+      - name: Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: npm
+      - name: Build
+        run: |
+          npm ci
+          npm run build
+      - name: Generate docs
+        run: npm run docs
+      - name: Archive docs
+        run: tar -cvf newdocumentation.tar ./docs
+      - name: Upload docs artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: newdocumentation
+          path: newdocumentation.tar
+
+  deploy:
+    needs: generate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout gh-pages
+        uses: actions/checkout@v3
+        with:
+          ref: gh-pages
+      - run: mkdir -p ./docs
+      - name: Download new docs artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: newdocumentation
+      - run: tar -xf newdocumentation.tar ./docs -C ./docs
+      - name: Deploy docs
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add .
+          git commit -m "Deploy updated documentation"
+          git push
