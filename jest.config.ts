@@ -12,7 +12,9 @@ const jestConfig: JestConfigWithTsJest = {
   },
   transformIgnorePatterns: ["<rootDir>/node_modules/(?!windows-1252/.*)"],
   modulePaths: [compilerOptions.baseUrl],
-  moduleNameMapper: pathsToModuleNameMapper(compilerOptions.paths),
+  moduleNameMapper: pathsToModuleNameMapper({
+    "@eolib/*": ["src/*", "generated/*"],
+  }),
 };
 
 export default jestConfig;
