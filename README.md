@@ -7,6 +7,20 @@
 
 A core TypeScript library for writing applications related to Endless Online.
 
+## Installation
+
+Install eolib using [`npm`](https://www.npmjs.com/package/eolib):
+
+```bash
+npm install --save eolib
+```
+
+Or [`yarn`](https://yarnpkg.com/en/package/eolib):
+
+```bash
+yarn add eolib
+```
+
 ## Features
 
 Read and write the following EO data structures:
