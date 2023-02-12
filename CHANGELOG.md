@@ -17,6 +17,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change `EifRecord.element` field type from `char` to `Element`.
 - Change `EnfRecord.element` field type from `short` to `Element`.
 - Change `EnfRecord.elementWeakness` field type from `short` to `Element`.
+- Change incorrect `QuestRequirementIcon` underlying type from `char` to `short`.
 
 ## [1.0.0-rc.1] - 2023-02-09
 
