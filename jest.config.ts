@@ -6,6 +6,7 @@ import type { JestConfigWithTsJest } from "ts-jest";
 const jestConfig: JestConfigWithTsJest = {
   preset: "ts-jest/presets/js-with-ts",
   roots: ["<rootDir>/src", "<rootDir>/test"],
+  collectCoverageFrom: ["src/**/*.ts"],
   transform: {
     "^.+\\.(ts)$": ["ts-jest", { tsconfig: "tsconfig.json" }],
     "^.+\\.(mjs)$": "babel-jest",
