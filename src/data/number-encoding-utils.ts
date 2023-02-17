@@ -6,7 +6,7 @@ import { CHAR_MAX, SHORT_MAX, THREE_MAX } from "./eo-numeric-limits";
  * @param number - the number to encode
  * @returns The encoded sequence of bytes
  */
-export function encodeNumber(_number: number) {
+export function encodeNumber(_number: number): Uint8Array {
   let value = _number;
   let d = 0xfe;
   if (_number >= THREE_MAX) {
@@ -37,7 +37,7 @@ export function encodeNumber(_number: number) {
  * @param bytes - the sequence of bytes to decode
  * @returns The decoded number
  */
-export function decodeNumber(bytes: Uint8Array) {
+export function decodeNumber(bytes: Uint8Array): number {
   let result = 0;
   const length = Math.min(bytes.length, 4);
 

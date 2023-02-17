@@ -38,7 +38,7 @@ export class EoWriter {
    * @param char - the number to encode and add
    * @throws `Error` if the value is not below {@link CHAR_MAX}.
    */
-  public addChar(char: number) {
+  public addChar(char: number): void {
     EoWriter.checkNumberSize(char, CHAR_MAX - 1);
     const bytes: Uint8Array = encodeNumber(char);
     this.doAddBytes(bytes, 1);

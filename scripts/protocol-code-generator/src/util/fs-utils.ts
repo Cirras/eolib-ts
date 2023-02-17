@@ -1,6 +1,9 @@
 import * as fs from "fs";
 
-export function findFiles(directory: string, predicate: (file: string) => {}) {
+export function findFiles(
+  directory: string,
+  predicate: (file: string) => {}
+): Array<string> {
   let files = new Array<string>();
   const items = fs.readdirSync(directory, { withFileTypes: true });
 
