@@ -74,7 +74,8 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: newdocumentation
-      - run: tar -xf newdocumentation.tar ./docs -C ./docs
+          path: /tmp/newdocumentation.tar
+      - run: tar -xf /tmp/newdocumentation.tar ./docs -C ./docs
       - name: Deploy docs
         run: |
           git config user.name 'github-actions[bot]'
