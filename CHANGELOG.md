@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Rename `AdminLevel.Guide` enum value to `Spy`.
+- Rename `AdminLevel.Guardian` enum value to `LightGuide`.
+- Rename `AdminLevel.Gm` enum value to `Guardian`.
+- Rename `AdminLevel.Hgm` enum value to `GameMaster`.
+- Rename `AdminLevel.Reserved5` enum value to `HighGameMaster`.
+
 ## [1.0.0-rc.2] - 2023-02-16
 
 ### Added
