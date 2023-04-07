@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Rename `ServerSettings.lightGuideFloodRate` field to `spyAndLightGuideFloodRate`.
 - Rename `ServerSettings.gameMasterAndHighGameMasterFloodRate` field to `gameMasterFloodRate`.
 - Rename `ServerSettings.reserved5FloodRate` field to `highGameMasterFloodRate`.
+- Add missing `PaperdollRemoveServerPacket.itemId` field.
+- Add missing `PaperdollRemoveServerPacket.subLoc` field.
+- Add missing `PaperdollAgreeServerPacket.itemId` field.
+- Add missing `PaperdollAgreeServerPacket.remainingAmount` field.
+- Add missing `PaperdollAgreeServerPacket.subLoc` field.
 
 ## [1.0.0-rc.2] - 2023-02-16
 
