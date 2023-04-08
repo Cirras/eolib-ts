@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.3] - 2023-04-08
+
 ### Added
 
 - Sanitize `0xFF` bytes in strings when writing chunked data structures.
@@ -98,6 +100,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Data encryption
   - Packet sequencer
 
-[unreleased]: https://github.com/cirras/eomap-js/compare/v1.0.0-rc.2...HEAD
-[1.0.0-rc.2]: https://github.com/cirras/eomap-js/releases/tag/v1.0.0-rc.2
-[1.0.0-rc.1]: https://github.com/cirras/eomap-js/releases/tag/v1.0.0-rc.1
+[unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.3...HEAD
+[1.0.0-rc.3]: https://github.com/cirras/eolib-ts/releases/tag/v1.0.0-rc.3
+[1.0.0-rc.2]: https://github.com/cirras/eolib-ts/releases/tag/v1.0.0-rc.2
+[1.0.0-rc.1]: https://github.com/cirras/eolib-ts/releases/tag/v1.0.0-rc.1
