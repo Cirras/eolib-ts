@@ -74,7 +74,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: newdocumentation
-          path: /tmp/newdocumentation.tar
+          path: /tmp
       - run: tar -xf /tmp/newdocumentation.tar ./docs -C ./docs
       - name: Deploy docs
         run: |
