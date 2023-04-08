@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+
+- Change incorrect `WalkCloseServerPacket` dummy value from `f` to `S`.
+- Change incorrect `WalkOpenServerPacket` dummy value from `u` to `S`.
+
 ## [1.0.0-rc.3] - 2023-04-08
 
 ### Added
