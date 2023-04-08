@@ -8,6 +8,7 @@ import * as windows1252 from "windows-1252";
 export class EoWriter {
   private data: Uint8Array = new Uint8Array(16);
   private _length: number = 0;
+  private _stringSanitizationMode = false;
 
   /**
    * Adds a raw byte to the writer data.
@@ -87,6 +88,7 @@ export class EoWriter {
    */
   public addString(str: string): void {
     const bytes: Uint8Array = EoWriter.encodeAnsi(str);
+    this.sanitizeString(bytes);
     this.doAddBytes(bytes);
   }
 
@@ -106,6 +108,7 @@ export class EoWriter {
   ): void {
     EoWriter.checkStringLength(str, length, padded);
     let bytes: Uint8Array = EoWriter.encodeAnsi(str);
+    this.sanitizeString(bytes);
     if (padded) {
       bytes = EoWriter.addPadding(bytes, length);
     }
@@ -119,6 +122,7 @@ export class EoWriter {
    */
   public addEncodedString(str: string): void {
     const bytes: Uint8Array = EoWriter.encodeAnsi(str);
+    this.sanitizeString(bytes);
     encodeString(bytes);
     this.doAddBytes(bytes);
   }
@@ -139,11 +143,33 @@ export class EoWriter {
   ): void {
     EoWriter.checkStringLength(str, length, padded);
     let bytes: Uint8Array = EoWriter.encodeAnsi(str);
+    this.sanitizeString(bytes);
     if (padded) {
       bytes = EoWriter.addPadding(bytes, length);
     }
     encodeString(bytes);
     this.doAddBytes(bytes);
+  }
+
+  /**
+   * Sets the string sanitization mode for the writer.
+   *
+   * <p>With string sanitization enabled, the writer will switch `0xFF` bytes in strings (ÿ)
+   * to `0x79` (y).
+   *
+   * @param chunkedReadingMode - the new chunked reading mode
+   */
+  public set stringSanitizationMode(stringSanitizationMode: boolean) {
+    this._stringSanitizationMode = stringSanitizationMode;
+  }
+
+  /**
+   * Gets the string sanitization mode for the writer
+   *
+   * @returns True if string sanitization is enabled
+   */
+  public get stringSanitizationMode(): boolean {
+    return this._stringSanitizationMode;
   }
 
   /**
@@ -185,6 +211,16 @@ export class EoWriter {
     const expanded = new Uint8Array(this.data.length * expandFactor);
     expanded.set(this.data);
     this.data = expanded;
+  }
+
+  private sanitizeString(bytes: Uint8Array): void {
+    if (this._stringSanitizationMode) {
+      for (let i = 0; i < bytes.length; ++i) {
+        if (bytes[i] == 0xff /* ÿ */) {
+          bytes[i] = 0x79 /* y */;
+        }
+      }
+    }
   }
 
   private static addPadding(bytes: Uint8Array, length: number): Uint8Array {

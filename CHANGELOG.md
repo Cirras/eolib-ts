@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Sanitize `0xFF` bytes in strings when writing chunked data structures.
+
+### Changed
+
 - Rename `AdminLevel.Guide` enum value to `Spy`.
 - Rename `AdminLevel.Guardian` enum value to `LightGuide`.
 - Rename `AdminLevel.Gm` enum value to `Guardian`.

@@ -111,6 +111,13 @@ describe("EoWriter", () => {
       writer.addString("foo");
       expect(writer.toByteArray()).toEqual(u8(0x66, 0x6f, 0x6f));
     });
+
+    it("should add a sanitized raw string value", () => {
+      const writer = new EoWriter();
+      writer.stringSanitizationMode = true;
+      writer.addString("aÿz");
+      expect(writer.toByteArray()).toEqual(u8(0x61, 0x79, 0x7a));
+    });
   });
 
   describe("#addFixedString()", () => {
@@ -132,6 +139,22 @@ describe("EoWriter", () => {
       const writer = new EoWriter();
       writer.addFixedString("bar", 3, true);
       expect(writer.toByteArray()).toEqual(u8(0x62, 0x61, 0x72));
+    });
+
+    it("should add a sanitized fixed-size raw string value", () => {
+      const writer = new EoWriter();
+      writer.stringSanitizationMode = true;
+      writer.addFixedString("aÿz", 3);
+      expect(writer.toByteArray()).toEqual(u8(0x61, 0x79, 0x7a));
+    });
+
+    it("should add a sanitized fixed-size raw string value with padding", () => {
+      const writer = new EoWriter();
+      writer.stringSanitizationMode = true;
+      writer.addFixedString("aÿz", 6, true);
+      expect(writer.toByteArray()).toEqual(
+        u8(0x61, 0x79, 0x7a, 0xff, 0xff, 0xff)
+      );
     });
 
     it("should throw when adding a string that's too long", () => {
@@ -161,6 +184,13 @@ describe("EoWriter", () => {
       writer.addEncodedString("foo");
       expect(writer.toByteArray()).toEqual(u8(0x5e, 0x30, 0x67));
     });
+
+    it("should add a sanitized encoded string value", () => {
+      const writer = new EoWriter();
+      writer.stringSanitizationMode = true;
+      writer.addEncodedString("aÿz");
+      expect(writer.toByteArray()).toEqual(u8(0x53, 0x26, 0x6c));
+    });
   });
 
   describe("#addFixedEncodedString()", () => {
@@ -184,6 +214,22 @@ describe("EoWriter", () => {
       expect(writer.toByteArray()).toEqual(u8(0x5b, 0x3e, 0x6b));
     });
 
+    it("should add a sanitized fixed-size encoded string value", () => {
+      const writer = new EoWriter();
+      writer.stringSanitizationMode = true;
+      writer.addFixedEncodedString("aÿz", 3);
+      expect(writer.toByteArray()).toEqual(u8(0x53, 0x26, 0x6c));
+    });
+
+    it("should add a sanitized fixed-size encoded string value with padding", () => {
+      const writer = new EoWriter();
+      writer.stringSanitizationMode = true;
+      writer.addFixedEncodedString("aÿz", 6, true);
+      expect(writer.toByteArray()).toEqual(
+        u8(0xff, 0xff, 0xff, 0x25, 0x54, 0x3e)
+      );
+    });
+
     it("should throw when adding a string that's too long", () => {
       const writer = new EoWriter();
       expect(() => writer.addFixedEncodedString("foo", 2)).toThrow();
@@ -205,8 +251,17 @@ describe("EoWriter", () => {
     });
   });
 
+  describe("#stringSanitizationMode", () => {
+    it("should return the string sanitization mode", () => {
+      const writer = new EoWriter();
+      expect(writer.stringSanitizationMode).toBe(false);
+      writer.stringSanitizationMode = true;
+      expect(writer.stringSanitizationMode).toBe(true);
+    });
+  });
+
   describe("#length", () => {
-    it("should add an encoded string value", () => {
+    it("should return the length", () => {
       const writer = new EoWriter();
       expect(writer.length).toBe(0);
 
