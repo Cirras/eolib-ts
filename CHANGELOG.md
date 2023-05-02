@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.0-rc.4] - 2023-05-02
+
 ### Added
 
 - Support for new `blob` type, which maps to `byte[]`.
@@ -120,7 +122,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Data encryption
   - Packet sequencer
 
-[unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.3...HEAD
-[1.0.0-rc.3]: https://github.com/cirras/eolib-ts/releases/tag/v1.0.0-rc.3
-[1.0.0-rc.2]: https://github.com/cirras/eolib-ts/releases/tag/v1.0.0-rc.2
+[unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.4...HEAD
+[1.0.0-rc.4]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.3...v1.0.0-rc.4
+[1.0.0-rc.3]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.2...v1.0.0-rc.3
+[1.0.0-rc.2]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.1...v1.0.0-rc.2
 [1.0.0-rc.1]: https://github.com/cirras/eolib-ts/releases/tag/v1.0.0-rc.1
