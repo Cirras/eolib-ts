@@ -1,4 +1,5 @@
 import { BasicType, isBasicType } from "../type/basic-type";
+import { BlobType } from "../type/blob-type";
 import { BoolType } from "../type/bool-type";
 import { isCustomType } from "../type/custom-type";
 import { hasUnderlyingType } from "../type/has-underlying-type";
@@ -472,6 +473,10 @@ class FieldCodeGenerator {
           this.padded
         )
       );
+    } else if (type instanceof BlobType) {
+      return new CodeBlock().addStatement(
+        `writer.addBytes(${valueExpression})`
+      );
     } else if (type instanceof StructType) {
       return new CodeBlock()
         .addStatement(`${type.name}.serialize(writer, ${valueExpression})`)
@@ -652,6 +657,8 @@ class FieldCodeGenerator {
       } else {
         statement.add(readBasicType);
       }
+    } else if (type instanceof BlobType) {
+      statement.add(`reader.getBytes(reader.remaining)`);
     } else if (type instanceof StructType) {
       statement.add(`${type.name}.deserialize(reader)`).addImportByType(type);
     } else {
@@ -722,6 +729,8 @@ class FieldCodeGenerator {
       return "string";
     } else if (type instanceof BoolType) {
       return "boolean";
+    } else if (type instanceof BlobType) {
+      return "Uint8Array";
     } else if (isCustomType(type)) {
       return type.name;
     } else {

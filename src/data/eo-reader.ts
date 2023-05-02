@@ -37,6 +37,15 @@ export class EoReader {
   }
 
   /**
+   * Reads an array of raw bytes from the input data.
+   *
+   * @returns An array of raw bytes
+   */
+  public getBytes(length: number): Uint8Array {
+    return this.readBytes(length);
+  }
+
+  /**
    * Reads an encoded 1-byte integer from the input data.
    *
    * @returns A decoded 1-byte integer

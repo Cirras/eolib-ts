@@ -18,6 +18,24 @@ describe("EoReader", () => {
     });
   });
 
+  describe("#getBytes()", () => {
+    it("should return raw byte values", () => {
+      const reader = readerFromBytes(0x01, 0x02, 0x03);
+      expect(reader.getBytes(3)).toEqual(new Uint8Array([0x01, 0x02, 0x03]));
+    });
+
+    it("should return a partial array when length < remaining", () => {
+      const reader = readerFromBytes(0x01, 0x02, 0x03);
+      expect(reader.getBytes(1)).toEqual(new Uint8Array([0x01]));
+    });
+
+    it("should return a truncated array when length > remaining", () => {
+      const reader = readerFromBytes(0x01, 0x02, 0x03);
+      expect(reader.getBytes(5)).toEqual(new Uint8Array([0x01, 0x02, 0x03]));
+      expect(reader.getBytes(0)).toHaveLength(0);
+    });
+  });
+
   describe("#getChar()", () => {
     it("should return decoded 1-byte values", () => {
       const reader = readerFromBytes(0x01, 0x02, 0x80, 0x81, 0xfd, 0xfe, 0xff);

@@ -16,6 +16,7 @@ import {
   getText,
 } from "../util/xml-utils";
 import { tryParseInt } from "../util/number-utils";
+import { BlobType } from "./blob-type";
 
 export class TypeFactory {
   private readonly unresolvedTypes: Map<string, UnresolvedCustomType>;
@@ -87,6 +88,9 @@ export class TypeFactory {
       case "string":
       case "encoded_string":
         result = new StringType(name, length);
+        break;
+      case "blob":
+        result = new BlobType();
         break;
       default:
         result = this.createCustomType(name, underlyingType);
