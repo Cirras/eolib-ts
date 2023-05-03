@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
-- Support for new `blob` type, which maps to `byte[]`.
+- Support for new `blob` type, which maps to `Uint8Array`.
 
 ### Changed
 
