@@ -7,6 +7,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- `WarpEffect.None` enum value.
+
+### Changed
+
+- Change `MapTileSpecRowTile.tileSpec` field type from `char` to `MapTileSpec`.
+
+### Fixed
+
+- Change incorrect `ChestReplyServerPacket.remainingAmount` field type from `short` to `int`.
+
 ## [1.0.0-rc.4] - 2023-05-02
 
 ### Added
