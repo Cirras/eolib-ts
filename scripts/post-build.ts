@@ -36,6 +36,12 @@ async function main() {
   fs.rmSync(generated, { recursive: true, force: true });
   await replaceTscAliasPaths({ configFile, declarationDir: undefined });
 
+  console.log(`Generating ${chalk.bold("package.json override")}.`);
+  fs.writeFileSync(
+    `${out}/package.json`,
+    `{\n  "type": "${buildType === "cjs" ? "commonjs" : "module"}"\n}`
+  );
+
   console.log(chalk.green("Build completed successfully."));
 }
 

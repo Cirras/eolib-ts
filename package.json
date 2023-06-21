@@ -6,7 +6,7 @@
     ".": {
       "import": {
         "types": "./lib/esm/types/src/index.d.ts",
-        "default": "./lib/esm/src/index.mjs"
+        "default": "./lib/esm/src/index.js"
       },
       "require": {
         "types": "./lib/cjs/types/src/index.d.ts",
@@ -16,6 +16,7 @@
   },
   "types": "./lib/cjs/types/src/index.d.ts",
   "main": "./lib/cjs/src/index.js",
+  "module": "./lib/esm/src/index.js",
   "files": [
     "lib/**/*"
   ],
