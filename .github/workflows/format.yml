@@ -14,7 +14,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          ref: ${{ github.head_ref }}
+          fetch-depth: 0
 
       - name: Check format with Prettier
         uses: creyD/prettier_action@v4.3
