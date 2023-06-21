@@ -5,7 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
+
+## [1.0.0-rc.6] - 2023-06-21
 
 ### Changed
 
@@ -153,7 +155,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Data encryption
   - Packet sequencer
 
-[unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.5...HEAD
+[unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.6...HEAD
+[1.0.0-rc.6]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.5...v1.0.0-rc.6
 [1.0.0-rc.5]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.4...v1.0.0-rc.5
 [1.0.0-rc.4]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.3...v1.0.0-rc.4
 [1.0.0-rc.3]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.2...v1.0.0-rc.3
