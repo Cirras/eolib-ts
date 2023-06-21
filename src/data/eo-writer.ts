@@ -157,7 +157,7 @@ export class EoWriter {
    * <p>With string sanitization enabled, the writer will switch `0xFF` bytes in strings (ÿ)
    * to `0x79` (y).
    *
-   * @param chunkedReadingMode - the new chunked reading mode
+   * @param stringSanitizationMode - the new string sanitization mode
    */
   public set stringSanitizationMode(stringSanitizationMode: boolean) {
     this._stringSanitizationMode = stringSanitizationMode;
