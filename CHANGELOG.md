@@ -7,6 +7,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Removed
+
+- `TradeRequestServerPacket.unk1` field.
+- `TradeCloseClientPacket.unk1` field.
+
+### Fixed
+
+- Fix incorrect (de)serialization of `NpcRangeRequestClientPacket`.
+
 ## [1.0.0-rc.6] - 2023-06-21
 
 ### Changed
