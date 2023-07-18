@@ -51,7 +51,7 @@ class FieldCodeGenerator {
     delimited: boolean,
     trailingDelimiter: boolean,
     lengthField: boolean,
-    offset: number
+    offset: number,
   ) {
     this.typeFactory = typeFactory;
     this.context = context;
@@ -85,7 +85,7 @@ class FieldCodeGenerator {
   private validateSpecialFields(): void {
     if (this.arrayField && this.lengthField) {
       throw new Error(
-        "A field cannot be both a length field and an array field."
+        "A field cannot be both a length field and an array field.",
       );
     }
   }
@@ -110,7 +110,7 @@ class FieldCodeGenerator {
       }
       if (!this.delimited && !this.getType().bounded) {
         throw new Error(
-          `Unbounded element type (${this.typeString}) forbidden in non-delimited array.`
+          `Unbounded element type (${this.typeString}) forbidden in non-delimited array.`,
         );
       }
     } else {
@@ -135,7 +135,7 @@ class FieldCodeGenerator {
       const type = this.getType();
       if (!(type instanceof IntegerType)) {
         throw new Error(
-          `${type.name} is not a numeric type, so it is not allowed for a length field.`
+          `${type.name} is not a numeric type, so it is not allowed for a length field.`,
         );
       }
     } else {
@@ -170,14 +170,14 @@ class FieldCodeGenerator {
       const length = tryParseInt(this.lengthString);
       if (length !== null && length !== this.hardcodedValue.length) {
         throw new Error(
-          `Expected length of ${length} for hardcoded string value "${this.hardcodedValue}".`
+          `Expected length of ${length} for hardcoded string value "${this.hardcodedValue}".`,
         );
       }
     }
 
     if (!isBasicType(type)) {
       throw new Error(
-        `Hardcoded field values are not allowed for ${type.name} fields (must be a basic type).`
+        `Hardcoded field values are not allowed for ${type.name} fields (must be a basic type).`,
       );
     }
   }
@@ -202,16 +202,16 @@ class FieldCodeGenerator {
       !this.context.lengthFieldIsReferencedMap.has(this.lengthString)
     ) {
       throw new Error(
-        `Length attribute "${this.lengthString}" must be a numeric literal, or refer to a length field.`
+        `Length attribute "${this.lengthString}" must be a numeric literal, or refer to a length field.`,
       );
     }
 
     const isAlreadyReferenced = this.context.lengthFieldIsReferencedMap.get(
-      this.lengthString
+      this.lengthString,
     );
     if (isAlreadyReferenced) {
       throw new Error(
-        `Length field "${this.lengthString}" must not be referenced by multiple fields.`
+        `Length field "${this.lengthString}" must not be referenced by multiple fields.`,
       );
     }
   }
@@ -243,11 +243,11 @@ class FieldCodeGenerator {
 
     this.context.accessibleFields.set(
       this.name,
-      new FieldData(tsName, type, this.offset, this.arrayField)
+      new FieldData(tsName, type, this.offset, this.arrayField),
     );
 
     this.data.fields.addLine(
-      `private _${tsName}: ${tsTypeName} = ${initializer}`
+      `private _${tsName}: ${tsTypeName} = ${initializer}`,
     );
 
     if (isCustomType(type)) {
@@ -268,7 +268,7 @@ class FieldCodeGenerator {
         .indent()
         .addStatement(`return this._${tsName}`)
         .unindent()
-        .addLine("}")
+        .addLine("}"),
     );
 
     if (this.hardcodedValue === null) {
@@ -281,12 +281,12 @@ class FieldCodeGenerator {
       if (this.context.lengthFieldIsReferencedMap.has(this.lengthString)) {
         this.context.lengthFieldIsReferencedMap.set(this.lengthString, true);
         const lengthFieldData = this.context.accessibleFields.get(
-          this.lengthString
+          this.lengthString,
         );
         setter
           .beginControlFlow(`if (this._${tsName} !== null)`)
           .addStatement(
-            `this._${lengthFieldData.tsName} = this._${tsName}.length`
+            `this._${lengthFieldData.tsName} = this._${tsName}.length`,
           )
           .endControlFlow();
       }
@@ -338,7 +338,7 @@ class FieldCodeGenerator {
       }
 
       this.data.serialize.beginControlFlow(
-        `for (let i = 0; i < ${arraySizeExpression}; ++i)`
+        `for (let i = 0; i < ${arraySizeExpression}; ++i)`,
       );
 
       if (this.delimited && !this.trailingDelimiter) {
@@ -371,11 +371,11 @@ class FieldCodeGenerator {
     const tsName = snakeCaseToCamelCase(this.name);
     if (this.context.reachedOptionalField) {
       this.data.serialize.addStatement(
-        `reachedNullOptional = reachedNullOptional || data._${tsName} === null`
+        `reachedNullOptional = reachedNullOptional || data._${tsName} === null`,
       );
     } else {
       this.data.serialize.addStatement(
-        `let reachedNullOptional = data._${tsName} === null`
+        `let reachedNullOptional = data._${tsName} === null`,
       );
     }
     this.data.serialize.beginControlFlow("if (!reachedNullOptional)");
@@ -390,7 +390,7 @@ class FieldCodeGenerator {
     this.data.serialize
       .beginControlFlow(`if (data._${tsName} === null)`)
       .addStatement(
-        `throw new SerializationError("${tsName} must not be null.")`
+        `throw new SerializationError("${tsName} must not be null.")`,
       )
       .endControlFlow()
       .addImport("SerializationError", "protocol/serialization-error");
@@ -434,7 +434,7 @@ class FieldCodeGenerator {
 
     this.data.serialize
       .beginControlFlow(
-        `if (data._${tsName}.length ${lengthCheckOperator} ${lengthExpression})`
+        `if (data._${tsName}.length ${lengthCheckOperator} ${lengthExpression})`,
       )
       .addStatement(`throw new SerializationError(\`${errorMessage}\`)`)
       .endControlFlow()
@@ -455,7 +455,7 @@ class FieldCodeGenerator {
     }
 
     const offsetExpression = FieldCodeGenerator.getLengthOffsetExpression(
-      -this.offset
+      -this.offset,
     );
     if (offsetExpression !== null) {
       valueExpression += offsetExpression;
@@ -470,12 +470,12 @@ class FieldCodeGenerator {
           type,
           valueExpression,
           lengthExpression,
-          this.padded
-        )
+          this.padded,
+        ),
       );
     } else if (type instanceof BlobType) {
       return new CodeBlock().addStatement(
-        `writer.addBytes(${valueExpression})`
+        `writer.addBytes(${valueExpression})`,
       );
     } else if (type instanceof StructType) {
       return new CodeBlock()
@@ -494,7 +494,7 @@ class FieldCodeGenerator {
           return this.hardcodedValue;
         }
         throw new Error(
-          `"${this.hardcodedValue}" is not a valid integer value.`
+          `"${this.hardcodedValue}" is not a valid integer value.`,
         );
       } else if (type instanceof BoolType) {
         switch (this.hardcodedValue) {
@@ -504,7 +504,7 @@ class FieldCodeGenerator {
             return "1";
           default:
             throw new Error(
-              `"${this.hardcodedValue}" is not a valid bool value.`
+              `"${this.hardcodedValue}" is not a valid bool value.`,
             );
         }
       } else if (type instanceof StringType) {
@@ -525,7 +525,7 @@ class FieldCodeGenerator {
     type: BasicType,
     valueExpression: string,
     lengthExpression: string | null,
-    padded: boolean
+    padded: boolean,
   ): string {
     switch (type.name) {
       case "byte":
@@ -580,7 +580,7 @@ class FieldCodeGenerator {
       if (elementSize !== null) {
         const arrayLengthVariableName = tsName + "Length";
         this.data.deserialize.addStatement(
-          `const ${arrayLengthVariableName} = Math.trunc(reader.remaining / ${elementSize})`
+          `const ${arrayLengthVariableName} = Math.trunc(reader.remaining / ${elementSize})`,
         );
         arrayLengthExpression = arrayLengthVariableName;
       }
@@ -592,7 +592,7 @@ class FieldCodeGenerator {
       this.data.deserialize.beginControlFlow("while (reader.remaining > 0)");
     } else {
       this.data.deserialize.beginControlFlow(
-        `for (let i = 0; i < ${arrayLengthExpression}; ++i)`
+        `for (let i = 0; i < ${arrayLengthExpression}; ++i)`,
       );
     }
 
@@ -603,7 +603,7 @@ class FieldCodeGenerator {
         !this.trailingDelimiter && arrayLengthExpression !== null;
       if (needsGuard) {
         this.data.deserialize.beginControlFlow(
-          `if (i + 1 < ${arrayLengthExpression})`
+          `if (i + 1 < ${arrayLengthExpression})`,
         );
       }
 
@@ -642,11 +642,11 @@ class FieldCodeGenerator {
       let readBasicType = FieldCodeGenerator.getReadStatementForBasicType(
         type,
         lengthExpression,
-        this.padded
+        this.padded,
       );
 
       const offsetExpression = FieldCodeGenerator.getLengthOffsetExpression(
-        this.offset
+        this.offset,
       );
       if (offsetExpression != null) {
         readBasicType += offsetExpression;
@@ -675,7 +675,7 @@ class FieldCodeGenerator {
   private static getReadStatementForBasicType(
     type: BasicType,
     lengthExpression: string,
-    padded: boolean
+    padded: boolean,
   ): string {
     switch (type.name) {
       case "byte":
@@ -781,7 +781,7 @@ export class FieldCodeGeneratorBuilder {
   constructor(
     typeFactory: TypeFactory,
     context: ObjectGenerationContext,
-    data: ObjectGenerationData
+    data: ObjectGenerationData,
   ) {
     this.typeFactory = typeFactory;
     this.context = context;
@@ -867,7 +867,7 @@ export class FieldCodeGeneratorBuilder {
       this._delimited,
       this._trailingDelimiter,
       this._lengthField,
-      this._offset
+      this._offset,
     );
   }
 }

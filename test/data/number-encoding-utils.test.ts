@@ -30,7 +30,7 @@ const TEST_DATA = [
 describe("encodeNumber()", function () {
   TEST_DATA.forEach((data) => {
     it(`should encode ${data.decoded} to [${data.encoded.join(
-      ", "
+      ", ",
     )}]`, function () {
       expect(encodeNumber(data.decoded)).toEqual(new Uint8Array(data.encoded));
     });

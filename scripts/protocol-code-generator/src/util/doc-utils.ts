@@ -2,7 +2,7 @@ import { CodeBlock } from "../generate/code-block";
 
 export function generateTsDoc(
   protocolComment: string,
-  notes: string[] = []
+  notes: string[] = [],
 ): CodeBlock {
   let lines: string[] = [];
 
@@ -12,7 +12,7 @@ export function generateTsDoc(
         .trim()
         .replace(/\n/g, "\n<br>\n")
         .split("\n")
-        .map((line) => line.trim())
+        .map((line) => line.trim()),
     );
   }
 

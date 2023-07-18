@@ -39,7 +39,7 @@ export class TypeFactory {
 
   public defineCustomType(
     protocolType: XmlElement,
-    sourcePath: string
+    sourcePath: string,
   ): boolean {
     const name = getRequiredStringAttribute(protocolType, "name");
     if (this.unresolvedTypes.has(name)) {
@@ -47,7 +47,7 @@ export class TypeFactory {
     }
     this.unresolvedTypes.set(
       name,
-      new UnresolvedCustomType(protocolType, sourcePath)
+      new UnresolvedCustomType(protocolType, sourcePath),
     );
     return true;
   }
@@ -100,7 +100,7 @@ export class TypeFactory {
     if (underlyingType !== null && !hasUnderlyingType(result)) {
       throw new Error(
         `${result.name} has no underlying type, ` +
-          `so ${underlyingType.name} is not allowed as an underlying type override.`
+          `so ${underlyingType.name} is not allowed as an underlying type override.`,
       );
     }
 
@@ -119,28 +119,28 @@ export class TypeFactory {
         const underlyingTypeName: string = parts[1];
         if (typeName === underlyingTypeName) {
           throw new Error(
-            `${typeName} type cannot specify itself as an underlying type.`
+            `${typeName} type cannot specify itself as an underlying type.`,
           );
         }
         const underlyingType = this.getType(underlyingTypeName);
         if (!(underlyingType instanceof IntegerType)) {
           throw new Error(
             `${underlyingType.name} is not a numeric type, ` +
-              `so it cannot be specified as an underlying type.`
+              `so it cannot be specified as an underlying type.`,
           );
         }
         return underlyingType;
 
       default:
         throw new Error(
-          `"${name}" type syntax is invalid. (Only one colon is allowed)`
+          `"${name}" type syntax is invalid. (Only one colon is allowed)`,
         );
     }
   }
 
   private createCustomType(
     name: string,
-    underlyingTypeOverride: IntegerType
+    underlyingTypeOverride: IntegerType,
   ): Type {
     const unresolvedType = this.unresolvedTypes.get(name);
     if (!unresolvedType) {
@@ -152,16 +152,16 @@ export class TypeFactory {
         return this.createEnumType(
           unresolvedType.typeXml,
           underlyingTypeOverride,
-          unresolvedType.relativePath
+          unresolvedType.relativePath,
         );
       case "struct":
         return this.createStructType(
           unresolvedType.typeXml,
-          unresolvedType.relativePath
+          unresolvedType.relativePath,
         );
       default:
         throw new Error(
-          `Unhandled CustomType xml element: <${unresolvedType.typeXml.name}>`
+          `Unhandled CustomType xml element: <${unresolvedType.typeXml.name}>`,
         );
     }
   }
@@ -169,7 +169,7 @@ export class TypeFactory {
   private createEnumType(
     protocolEnum: XmlElement,
     underlyingTypeOverride: IntegerType | null,
-    relativePath: string
+    relativePath: string,
   ): Type {
     let underlyingType = underlyingTypeOverride;
     const enumName = getRequiredStringAttribute(protocolEnum, "name");
@@ -177,11 +177,11 @@ export class TypeFactory {
     if (!underlyingType) {
       const underlyingTypeName = getRequiredStringAttribute(
         protocolEnum,
-        "type"
+        "type",
       );
       if (enumName === underlyingTypeName) {
         throw new Error(
-          `${protocolEnum.name} type cannot specify itself as an underlying type.`
+          `${protocolEnum.name} type cannot specify itself as an underlying type.`,
         );
       }
 
@@ -189,7 +189,7 @@ export class TypeFactory {
       if (!(defaultUnderlyingType instanceof IntegerType)) {
         throw new Error(
           `${defaultUnderlyingType.name} is not a numeric type, ` +
-            `so it cannot be specified as an underlying type.`
+            `so it cannot be specified as an underlying type.`,
         );
       }
 
@@ -197,7 +197,7 @@ export class TypeFactory {
     }
 
     const protocolValues = protocolEnum.children.filter(
-      (child) => child instanceof XmlElement && child.name === "value"
+      (child) => child instanceof XmlElement && child.name === "value",
     ) as Array<XmlElement>;
 
     const values = new Array<EnumValue>();
@@ -211,8 +211,8 @@ export class TypeFactory {
       if (ordinal === null) {
         throw new Error(
           `${enumName}.${valueName} has invalid ordinal value \"${getText(
-            protocolValue
-          )}\"`
+            protocolValue,
+          )}\"`,
         );
       }
 
@@ -220,7 +220,7 @@ export class TypeFactory {
         ordinals.add(ordinal);
       } else {
         throw new Error(
-          `${enumName}.${valueName} cannot redefine ordinal value ${ordinal}.`
+          `${enumName}.${valueName} cannot redefine ordinal value ${ordinal}.`,
         );
       }
 
@@ -228,7 +228,7 @@ export class TypeFactory {
         names.add(valueName);
       } else {
         throw new Error(
-          `${enumName} enum cannot redefine value name ${valueName}.`
+          `${enumName} enum cannot redefine value name ${valueName}.`,
         );
       }
 
@@ -240,13 +240,13 @@ export class TypeFactory {
 
   private createStructType(
     protocolStruct: XmlElement,
-    relativePath: string
+    relativePath: string,
   ): Type {
     return new StructType(
       getRequiredStringAttribute(protocolStruct, "name"),
       this.calculateFixedStructSize(protocolStruct),
       this.isBounded(protocolStruct),
-      relativePath
+      relativePath,
     );
   }
 
@@ -288,11 +288,11 @@ export class TypeFactory {
   }
 
   private calculateFixedStructFieldSize(
-    protocolField: XmlElement
+    protocolField: XmlElement,
   ): number | null {
     const type = this.getType(
       getRequiredStringAttribute(protocolField, "type"),
-      TypeFactory.createTypeLengthForField(protocolField)
+      TypeFactory.createTypeLengthForField(protocolField),
     );
     const fieldSize = type.fixedSize;
     if (fieldSize === null) {
@@ -309,7 +309,7 @@ export class TypeFactory {
   }
 
   private calculateFixedStructArraySize(
-    protocolArray: XmlElement
+    protocolArray: XmlElement,
   ): number | null {
     const length = tryParseInt(getStringAttribute(protocolArray, "length"));
     if (length === null) {
@@ -318,7 +318,7 @@ export class TypeFactory {
     }
 
     const type = this.getType(
-      getRequiredStringAttribute(protocolArray, "type")
+      getRequiredStringAttribute(protocolArray, "type"),
     );
     const elementSize = type.fixedSize;
     if (elementSize === null) {
@@ -341,10 +341,10 @@ export class TypeFactory {
   }
 
   private calculateFixedStructDummySize(
-    protocolDummy: XmlElement
+    protocolDummy: XmlElement,
   ): number | null {
     const type = this.getType(
-      getRequiredStringAttribute(protocolDummy, "type")
+      getRequiredStringAttribute(protocolDummy, "type"),
     );
 
     const dummySize = type.fixedSize;
@@ -369,13 +369,13 @@ export class TypeFactory {
         case "field":
           const fieldType = this.getType(
             getRequiredStringAttribute(instruction, "type"),
-            TypeFactory.createTypeLengthForField(instruction)
+            TypeFactory.createTypeLengthForField(instruction),
           );
           result = fieldType.bounded;
           break;
         case "array":
           const elementType = this.getType(
-            getRequiredStringAttribute(instruction, "type")
+            getRequiredStringAttribute(instruction, "type"),
           );
           result =
             elementType.bounded &&
@@ -383,7 +383,7 @@ export class TypeFactory {
           break;
         case "dummy":
           const dummyType = this.getType(
-            getRequiredStringAttribute(instruction, "type")
+            getRequiredStringAttribute(instruction, "type"),
           );
           result = dummyType.bounded;
           break;
@@ -395,7 +395,7 @@ export class TypeFactory {
 
   private static flattenInstructions(
     element: XmlElement,
-    result: XmlElement[] = []
+    result: XmlElement[] = [],
   ): XmlElement[] {
     for (const instruction of getInstructions(element)) {
       result.push(instruction);
@@ -405,7 +405,7 @@ export class TypeFactory {
         }
       } else if (instruction.name === "switch") {
         const protocolCases = instruction.children.filter(
-          (child) => child instanceof XmlElement && child.name === "case"
+          (child) => child instanceof XmlElement && child.name === "case",
         ) as Array<XmlElement>;
         for (const protocolCase of protocolCases) {
           for (const caseInstruction of getInstructions(protocolCase)) {
@@ -428,7 +428,7 @@ export class TypeFactory {
 
   private static createTypeWithSpecifiedLength(
     name: string,
-    length: Length
+    length: Length,
   ): Type {
     switch (name) {
       case "string":
@@ -436,7 +436,7 @@ export class TypeFactory {
         return new StringType(name, length);
       default:
         throw new Error(
-          `${name} type with length ${length} is invalid. (Only string types may specify a length)`
+          `${name} type with length ${length} is invalid. (Only string types may specify a length)`,
         );
     }
   }

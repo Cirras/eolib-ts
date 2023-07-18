@@ -131,7 +131,7 @@ describe("EoWriter", () => {
       const writer = new EoWriter();
       writer.addFixedString("bar", 6, true);
       expect(writer.toByteArray()).toEqual(
-        u8(0x62, 0x61, 0x72, 0xff, 0xff, 0xff)
+        u8(0x62, 0x61, 0x72, 0xff, 0xff, 0xff),
       );
     });
 
@@ -153,7 +153,7 @@ describe("EoWriter", () => {
       writer.stringSanitizationMode = true;
       writer.addFixedString("aÿz", 6, true);
       expect(writer.toByteArray()).toEqual(
-        u8(0x61, 0x79, 0x7a, 0xff, 0xff, 0xff)
+        u8(0x61, 0x79, 0x7a, 0xff, 0xff, 0xff),
       );
     });
 
@@ -204,7 +204,7 @@ describe("EoWriter", () => {
       const writer = new EoWriter();
       writer.addFixedEncodedString("bar", 6, true);
       expect(writer.toByteArray()).toEqual(
-        u8(0xff, 0xff, 0xff, 0x2d, 0x6c, 0x3d)
+        u8(0xff, 0xff, 0xff, 0x2d, 0x6c, 0x3d),
       );
     });
 
@@ -226,7 +226,7 @@ describe("EoWriter", () => {
       writer.stringSanitizationMode = true;
       writer.addFixedEncodedString("aÿz", 6, true);
       expect(writer.toByteArray()).toEqual(
-        u8(0xff, 0xff, 0xff, 0x25, 0x54, 0x3e)
+        u8(0xff, 0xff, 0xff, 0x25, 0x54, 0x3e),
       );
     });
 

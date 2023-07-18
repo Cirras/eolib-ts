@@ -23,7 +23,7 @@ export function getInstructions(element: XmlElement): Array<XmlElement> {
 
 export function getComment(element: XmlElement): string | null {
   const commentElement: XmlElement = element.children.find(
-    (child) => child instanceof XmlElement && child.name === "comment"
+    (child) => child instanceof XmlElement && child.name === "comment",
   ) as XmlElement;
 
   if (commentElement) {
@@ -57,7 +57,7 @@ export function getText(element: XmlElement): string | null {
 export function getStringAttribute(
   element: XmlElement,
   name: string,
-  defaultValue: string = null
+  defaultValue: string = null,
 ): string {
   const attributeText: string | undefined = element.attributes[name];
   if (attributeText === undefined) {
@@ -69,7 +69,7 @@ export function getStringAttribute(
 export function getIntAttribute(
   element: XmlElement,
   name: string,
-  defaultValue: number = 0
+  defaultValue: number = 0,
 ): number {
   const attributeText: string | undefined = element.attributes[name];
   if (attributeText === undefined) {
@@ -78,7 +78,7 @@ export function getIntAttribute(
   const result: number | null = tryParseInt(attributeText);
   if (result === null) {
     throw new Error(
-      `${name} attribute has invalid integer value: ${attributeText.trim()}`
+      `${name} attribute has invalid integer value: ${attributeText.trim()}`,
     );
   }
   return result;
@@ -87,7 +87,7 @@ export function getIntAttribute(
 export function getBooleanAttribute(
   element: XmlElement,
   name: string,
-  defaultValue: boolean = false
+  defaultValue: boolean = false,
 ): boolean {
   const attributeText: string | undefined = element.attributes[name];
   if (attributeText === undefined) {
@@ -98,7 +98,7 @@ export function getBooleanAttribute(
 
 export function getRequiredStringAttribute(
   element: XmlElement,
-  name: string
+  name: string,
 ): string {
   requireAttribute(element, name);
   return getStringAttribute(element, name);
@@ -106,7 +106,7 @@ export function getRequiredStringAttribute(
 
 export function getRequiredIntAttribute(
   element: XmlElement,
-  name: string
+  name: string,
 ): number {
   requireAttribute(element, name);
   return getIntAttribute(element, name);
@@ -114,7 +114,7 @@ export function getRequiredIntAttribute(
 
 export function getRequiredBooleanAttribute(
   element: XmlElement,
-  name: string
+  name: string,
 ): boolean {
   requireAttribute(element, name);
   return getBooleanAttribute(element, name);

@@ -29,7 +29,7 @@ export class SwitchCodeGenerator {
     fieldName: string,
     typeFactory: TypeFactory,
     context: ObjectGenerationContext,
-    data: ObjectGenerationData
+    data: ObjectGenerationData,
   ) {
     this.fieldName = fieldName;
     this.typeFactory = typeFactory;
@@ -53,7 +53,7 @@ export class SwitchCodeGenerator {
     this.data.addAuxillaryType(
       new CodeBlock()
         .add(tsDoc)
-        .addLine(`export type ${this.getInterfaceTypeName()} = ${unionType};`)
+        .addLine(`export type ${this.getInterfaceTypeName()} = ${unionType};`),
     );
   }
 
@@ -64,7 +64,7 @@ export class SwitchCodeGenerator {
     const switchFieldName = this.getFieldData().tsName;
 
     this.data.fields.addLine(
-      `private _${caseDataFieldName}: ${interfaceTypeName};`
+      `private _${caseDataFieldName}: ${interfaceTypeName};`,
     );
 
     const getterTsDoc = `/**
@@ -82,7 +82,7 @@ export class SwitchCodeGenerator {
         .indent()
         .addStatement(`return this._${caseDataFieldName}`)
         .unindent()
-        .addLine("}")
+        .addLine("}"),
     );
 
     const setterTsDoc = `/**
@@ -97,12 +97,12 @@ export class SwitchCodeGenerator {
       new CodeBlock()
         .add(setterTsDoc)
         .addLine(
-          `public set ${caseDataFieldName}(${caseDataFieldName}: ${interfaceTypeName}) {`
+          `public set ${caseDataFieldName}(${caseDataFieldName}: ${interfaceTypeName}) {`,
         )
         .indent()
         .addStatement(`this._${caseDataFieldName} = ${caseDataFieldName}`)
         .unindent()
-        .addLine("}")
+        .addLine("}"),
     );
   }
 
@@ -141,7 +141,7 @@ export class SwitchCodeGenerator {
           "throw new SerializationError(" +
             `"Expected ${caseDataFieldName} to be null ` +
             `for ${fieldData.tsName} " + data._${fieldData.tsName} + "."` +
-            ")"
+            ")",
         )
         .endControlFlow()
         .addImport("SerializationError", "protocol/serialization-error");
@@ -149,27 +149,27 @@ export class SwitchCodeGenerator {
       this.data.deserialize.addStatement(`data._${caseDataFieldName} = null`);
     } else {
       this.data.addAuxillaryType(
-        this.generateCaseDataType(protocolCase, caseDataTypeName, caseContext)
+        this.generateCaseDataType(protocolCase, caseDataTypeName, caseContext),
       );
 
       this.data.serialize
         .beginControlFlow(
-          `if (!(data._${caseDataFieldName} instanceof ${this.data.className}.${caseDataTypeName}))`
+          `if (!(data._${caseDataFieldName} instanceof ${this.data.className}.${caseDataTypeName}))`,
         )
         .addStatement(
           "throw new SerializationError(" +
             `"Expected ${caseDataFieldName} to be type ${caseDataTypeName} ` +
             `for ${fieldData.tsName} " + data._${fieldData.tsName} + "."` +
-            ")"
+            ")",
         )
         .endControlFlow()
         .addStatement(
-          `${this.data.className}.${caseDataTypeName}.serialize(writer, data._${caseDataFieldName})`
+          `${this.data.className}.${caseDataTypeName}.serialize(writer, data._${caseDataFieldName})`,
         )
         .addImport("SerializationError", "protocol/serialization-error");
 
       this.data.deserialize.addStatement(
-        `data._${caseDataFieldName} = ${this.data.className}.${caseDataTypeName}.deserialize(reader)`
+        `data._${caseDataFieldName} = ${this.data.className}.${caseDataTypeName}.deserialize(reader)`,
       );
     }
 
@@ -182,19 +182,19 @@ export class SwitchCodeGenerator {
   private generateCaseDataType(
     protocolCase: XmlElement,
     caseDataTypeName: string,
-    caseContext: ObjectGenerationContext
+    caseContext: ObjectGenerationContext,
   ): CodeBlock {
     const objectCodeGenerator = new ObjectCodeGenerator(
       caseDataTypeName,
       this.typeFactory,
-      caseContext
+      caseContext,
     );
 
     objectCodeGenerator.data.superInterfaces.push(this.getInterfaceTypeName());
 
     getInstructions(protocolCase).forEach(
       objectCodeGenerator.generateInstruction,
-      objectCodeGenerator
+      objectCodeGenerator,
     );
 
     const fieldData = this.getFieldData();
@@ -253,7 +253,7 @@ export class SwitchCodeGenerator {
 
     if (fieldData.array) {
       throw new Error(
-        `"${this.fieldName}" field referenced by switch must not be an array.`
+        `"${this.fieldName}" field referenced by switch must not be an array.`,
       );
     }
 
@@ -273,7 +273,7 @@ export class SwitchCodeGenerator {
         const enumValue = fieldType.getEnumValueByOrdinal(ordinalValue);
         if (enumValue !== null) {
           throw new Error(
-            `${fieldType.name} value ${caseValue} must be referred to by name (${enumValue.name})`
+            `${fieldType.name} value ${caseValue} must be referred to by name (${enumValue.name})`,
           );
         }
         return caseValue;
@@ -282,14 +282,14 @@ export class SwitchCodeGenerator {
       const enumValue = fieldType.getEnumValueByName(caseValue);
       if (enumValue === null) {
         throw new Error(
-          `"${caseValue}" is not a valid value for enum type ${fieldType.name}.`
+          `"${caseValue}" is not a valid value for enum type ${fieldType.name}.`,
         );
       }
       return `${fieldType.name}.${enumValue.name}`;
     }
 
     throw new Error(
-      `${this.fieldName} field referenced by switch must be a numeric or enumeration type.`
+      `${this.fieldName} field referenced by switch must be a numeric or enumeration type.`,
     );
   }
 }

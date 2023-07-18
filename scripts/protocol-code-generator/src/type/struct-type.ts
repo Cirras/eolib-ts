@@ -10,7 +10,7 @@ export class StructType implements CustomType {
     name: string,
     fixedSize: number | null,
     bounded: boolean,
-    sourcePath: string
+    sourcePath: string,
   ) {
     this._name = name;
     this._fixedSize = fixedSize;

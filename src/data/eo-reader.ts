@@ -131,7 +131,7 @@ export class EoReader {
    */
   public getFixedEncodedString(
     length: number,
-    padded: boolean = false
+    padded: boolean = false,
   ): string {
     if (length < 0) {
       throw new Error("Negative length");

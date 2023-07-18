@@ -11,7 +11,7 @@ export class EnumType implements CustomType {
     name: string,
     sourcePath: string,
     underlyingType: IntegerType,
-    values: EnumValue[]
+    values: EnumValue[],
   ) {
     this._name = name;
     this._sourcePath = sourcePath;

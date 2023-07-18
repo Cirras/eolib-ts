@@ -60,7 +60,7 @@ export class CodeBlock {
   public addImportByType(type: CustomType): this {
     this.addImport(
       type.name,
-      path.posix.join(type.sourcePath, pascalCaseToKebabCase(type.name))
+      path.posix.join(type.sourcePath, pascalCaseToKebabCase(type.name)),
     );
     return this;
   }

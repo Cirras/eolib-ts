@@ -25,7 +25,7 @@ export class TSFile {
     fs.writeFileSync(
       outputPath,
       header.toString() + this.codeBlock.toString(),
-      "utf-8"
+      "utf-8",
     );
   }
 }

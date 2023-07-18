@@ -71,7 +71,7 @@ export class InitSequenceStart extends AbstractSequenceStart {
     const seq1Max = Math.trunc((value + 13) / 7);
     const seq1Min = Math.max(
       0,
-      Math.trunc((value - (CHAR_MAX - 1) + 13 + 6) / 7)
+      Math.trunc((value - (CHAR_MAX - 1) + 13 + 6) / 7),
     );
 
     const seq1 = randBetween(0, seq1Max - seq1Min) + seq1Min;

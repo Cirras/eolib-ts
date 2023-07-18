@@ -13,7 +13,7 @@ declare module "windows-1252" {
   export function encode(text: string, options?: EncodeOptions): Uint16Array;
   export function decode(
     buffer: Uint16Array | Uint8Array | Buffer | string,
-    options?: DecodeOptions
+    options?: DecodeOptions,
   ): string;
   export type labels = string[];
 }

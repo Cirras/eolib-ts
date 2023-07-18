@@ -104,7 +104,7 @@ export class EoWriter {
   public addFixedString(
     str: string,
     length: number,
-    padded: boolean = false
+    padded: boolean = false,
   ): void {
     EoWriter.checkStringLength(str, length, padded);
     let bytes: Uint8Array = EoWriter.encodeAnsi(str);
@@ -139,7 +139,7 @@ export class EoWriter {
   public addFixedEncodedString(
     str: string,
     length: number,
-    padded: boolean = false
+    padded: boolean = false,
   ): void {
     EoWriter.checkStringLength(str, length, padded);
     let bytes: Uint8Array = EoWriter.encodeAnsi(str);
@@ -192,7 +192,7 @@ export class EoWriter {
 
   private doAddBytes(
     bytes: Uint8Array,
-    bytesLength: number = bytes.length
+    bytesLength: number = bytes.length,
   ): void {
     let expandFactor = 1;
     while (this._length + bytesLength > this.data.length * expandFactor) {
@@ -243,20 +243,20 @@ export class EoWriter {
   private static checkStringLength(
     str: string,
     length: number,
-    padded: boolean
+    padded: boolean,
   ): void {
     if (padded) {
       if (length >= str.length) {
         return;
       }
       throw new Error(
-        `Padded string "${str}" is too large for a length of ${length}.`
+        `Padded string "${str}" is too large for a length of ${length}.`,
       );
     }
 
     if (str.length != length) {
       throw new Error(
-        `String "${str}" does not have expected length of ${length}.`
+        `String "${str}" does not have expected length of ${length}.`,
       );
     }
   }

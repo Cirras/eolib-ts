@@ -11,7 +11,7 @@ async function main() {
   }
 
   const configFile = path.resolve(
-    `${__dirname}/../config/tsconfig.${buildType}.json`
+    `${__dirname}/../config/tsconfig.${buildType}.json`,
   );
   const declarationDir = path.resolve(`${__dirname}/../lib/${buildType}/types`);
 
@@ -39,7 +39,7 @@ async function main() {
   console.log(`Generating ${chalk.bold("package.json override")}.`);
   fs.writeFileSync(
     `${out}/package.json`,
-    `{\n  "type": "${buildType === "cjs" ? "commonjs" : "module"}"\n}`
+    `{\n  "type": "${buildType === "cjs" ? "commonjs" : "module"}"\n}`,
   );
 
   console.log(chalk.green("Build completed successfully."));

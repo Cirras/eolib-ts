@@ -23,7 +23,7 @@ export class ObjectCodeGenerator {
   public constructor(
     className: string,
     typeFactory: TypeFactory,
-    context = new ObjectGenerationContext()
+    context = new ObjectGenerationContext(),
   ) {
     this.typeFactory = typeFactory;
     this.context = context;
@@ -33,7 +33,7 @@ export class ObjectCodeGenerator {
   public generateInstruction(instruction: XmlElement): void {
     if (this.context.reachedDummy) {
       throw new Error(
-        "<dummy> elements must not be followed by any other elements."
+        "<dummy> elements must not be followed by any other elements.",
       );
     }
     switch (instruction.name) {
@@ -125,7 +125,7 @@ export class ObjectCodeGenerator {
     const result: CodeBlock = new CodeBlock()
       .add(tsDoc)
       .addLine(
-        `public static serialize(writer: EoWriter, data: ${className}): void {`
+        `public static serialize(writer: EoWriter, data: ${className}): void {`,
       )
       .indent();
 
@@ -199,7 +199,7 @@ export class ObjectCodeGenerator {
     if (delimited && !this.context.chunkedReadingEnabled) {
       throw new Error(
         "Cannot generate a delimited array instruction unless chunked reading is enabled." +
-          " (All delimited <array> elements must be within <chunked> sections.)"
+          " (All delimited <array> elements must be within <chunked> sections.)",
       );
     }
 
@@ -212,7 +212,7 @@ export class ObjectCodeGenerator {
       .arrayField(true)
       .delimited(delimited)
       .trailingDelimiter(
-        getBooleanAttribute(protocolArray, "trailing-delimiter")
+        getBooleanAttribute(protocolArray, "trailing-delimiter"),
       )
       .build();
 
@@ -259,10 +259,10 @@ export class ObjectCodeGenerator {
 
     if (needsIfGuards) {
       this.data.serialize.beginControlFlow(
-        "if (writer.length === oldWriterLength)"
+        "if (writer.length === oldWriterLength)",
       );
       this.data.deserialize.beginControlFlow(
-        "if (reader.position === readerStartPosition)"
+        "if (reader.position === readerStartPosition)",
       );
     }
 
@@ -284,14 +284,14 @@ export class ObjectCodeGenerator {
     return new FieldCodeGeneratorBuilder(
       this.typeFactory,
       this.context,
-      this.data
+      this.data,
     );
   }
 
   private checkOptionalField(optional: boolean): void {
     if (this.context.reachedOptionalField && !optional) {
       throw new Error(
-        "Optional fields may not be followed by non-optional fields."
+        "Optional fields may not be followed by non-optional fields.",
       );
     }
   }
@@ -301,7 +301,7 @@ export class ObjectCodeGenerator {
       getRequiredStringAttribute(protocolSwitch, "field"),
       this.typeFactory,
       this.context,
-      this.data
+      this.data,
     );
 
     const protocolCases: XmlElement[] = protocolSwitch.children
@@ -349,7 +349,7 @@ export class ObjectCodeGenerator {
     if (!this.context.chunkedReadingEnabled) {
       throw new Error(
         "Cannot generate a break instruction unless chunked reading is enabled." +
-          " (All <break> elements must be within <chunked> sections.)"
+          " (All <break> elements must be within <chunked> sections.)",
       );
     }
 
@@ -371,7 +371,7 @@ export class FieldData {
     tsName: string,
     type: Type,
     offset: number,
-    array: boolean
+    array: boolean,
   ) {
     this._tsName = tsName;
     this._type = type;
@@ -421,7 +421,7 @@ export class ObjectGenerationContext {
     result._needsOldWriterLengthVariable = this._needsOldWriterLengthVariable;
     result._accessibleFields = new Map(this._accessibleFields);
     result._lengthFieldIsReferencedMap = new Map(
-      this._lengthFieldIsReferencedMap
+      this._lengthFieldIsReferencedMap,
     );
     return result;
   }
@@ -463,7 +463,7 @@ export class ObjectGenerationContext {
   }
 
   public set needsOldWriterLengthVariable(
-    needsOldWriterLengthVariable: boolean
+    needsOldWriterLengthVariable: boolean,
   ) {
     this._needsOldWriterLengthVariable = needsOldWriterLengthVariable;
   }

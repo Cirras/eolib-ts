@@ -52,7 +52,7 @@ export class ProtocolCodeGenerator {
   private indexProtocolFiles(): void {
     findFiles(
       this.inputRoot,
-      (file) => path.basename(file) === "protocol.xml"
+      (file) => path.basename(file) === "protocol.xml",
     ).forEach(this.indexProtocolFile, this);
   }
 
@@ -65,7 +65,7 @@ export class ProtocolCodeGenerator {
 
       const protocolElements = document.children.filter(
         (element) =>
-          element instanceof XmlElement && element.name === "protocol"
+          element instanceof XmlElement && element.name === "protocol",
       ) as XmlElement[];
 
       if (protocolElements.length === 0) {
@@ -76,15 +76,15 @@ export class ProtocolCodeGenerator {
       this.protocolFiles.push(protocol);
 
       const enumElements = protocol.children.filter(
-        (element) => element instanceof XmlElement && element.name === "enum"
+        (element) => element instanceof XmlElement && element.name === "enum",
       ) as XmlElement[];
 
       const structElements = protocol.children.filter(
-        (element) => element instanceof XmlElement && element.name === "struct"
+        (element) => element instanceof XmlElement && element.name === "struct",
       ) as XmlElement[];
 
       const packetElements = protocol.children.filter(
-        (element) => element instanceof XmlElement && element.name === "packet"
+        (element) => element instanceof XmlElement && element.name === "packet",
       ) as XmlElement[];
 
       const sourcePath =
@@ -95,8 +95,8 @@ export class ProtocolCodeGenerator {
           throw new Error(
             `${getRequiredStringAttribute(
               protocolEnum,
-              "name"
-            )} type cannot be redefined.`
+              "name",
+            )} type cannot be redefined.`,
           );
         }
       }
@@ -106,8 +106,8 @@ export class ProtocolCodeGenerator {
           throw new Error(
             `${getRequiredStringAttribute(
               protocolStruct,
-              "name"
-            )} type cannot be redefined.`
+              "name",
+            )} type cannot be redefined.`,
           );
         }
       }
@@ -121,7 +121,7 @@ export class ProtocolCodeGenerator {
 
         if (declaredPackets.has(packetIdentifier)) {
           throw new Error(
-            `${packetIdentifier} packet cannot be redefined in the same file.`
+            `${packetIdentifier} packet cannot be redefined in the same file.`,
           );
         }
 
@@ -140,15 +140,15 @@ export class ProtocolCodeGenerator {
 
   private generateSourceFile(protocol: XmlElement): void {
     const enumElements = protocol.children.filter(
-      (element) => element instanceof XmlElement && element.name === "enum"
+      (element) => element instanceof XmlElement && element.name === "enum",
     ) as XmlElement[];
 
     const structElements = protocol.children.filter(
-      (element) => element instanceof XmlElement && element.name === "struct"
+      (element) => element instanceof XmlElement && element.name === "struct",
     ) as XmlElement[];
 
     const packetElements = protocol.children.filter(
-      (element) => element instanceof XmlElement && element.name === "packet"
+      (element) => element instanceof XmlElement && element.name === "packet",
     ) as XmlElement[];
 
     const tsFiles: TSFile[] = [
@@ -162,7 +162,7 @@ export class ProtocolCodeGenerator {
 
   private generateEnum(protocolEnum: XmlElement): TSFile {
     const type = this.typeFactory.getType(
-      getRequiredStringAttribute(protocolEnum, "name")
+      getRequiredStringAttribute(protocolEnum, "name"),
     ) as EnumType;
 
     console.log(`${chalk.blue("Generating enum")}: ${type.name}`);
@@ -188,7 +188,7 @@ export class ProtocolCodeGenerator {
 
     const relativePath = path.posix.join(
       type.sourcePath,
-      pascalCaseToKebabCase(type.name)
+      pascalCaseToKebabCase(type.name),
     );
     this.exports.push(relativePath);
 
@@ -197,24 +197,24 @@ export class ProtocolCodeGenerator {
 
   private generateStruct(protocolStruct: XmlElement): TSFile {
     const type = this.typeFactory.getType(
-      getRequiredStringAttribute(protocolStruct, "name")
+      getRequiredStringAttribute(protocolStruct, "name"),
     ) as StructType;
 
     console.log(`${chalk.green("Generating struct")}: ${type.name}`);
 
     const objectCodeGenerator = new ObjectCodeGenerator(
       type.name,
-      this.typeFactory
+      this.typeFactory,
     );
 
     getInstructions(protocolStruct).forEach(
       objectCodeGenerator.generateInstruction,
-      objectCodeGenerator
+      objectCodeGenerator,
     );
 
     const relativePath = path.posix.join(
       type.sourcePath,
-      pascalCaseToKebabCase(type.name)
+      pascalCaseToKebabCase(type.name),
     );
     this.exports.push(relativePath);
 
@@ -222,7 +222,7 @@ export class ProtocolCodeGenerator {
       relativePath + ".ts",
       new CodeBlock()
         .addCodeBlock(generateTsDoc(getComment(protocolStruct)))
-        .addCodeBlock(objectCodeGenerator.code)
+        .addCodeBlock(objectCodeGenerator.code),
     );
   }
 
@@ -231,11 +231,11 @@ export class ProtocolCodeGenerator {
     const packetSuffix = ProtocolCodeGenerator.makePacketSuffix(sourcePath);
     const familyAttribute = getRequiredStringAttribute(
       protocolPacket,
-      "family"
+      "family",
     );
     const actionAttribute = getRequiredStringAttribute(
       protocolPacket,
-      "action"
+      "action",
     );
     const packetTypeName = familyAttribute + actionAttribute + packetSuffix;
 
@@ -263,11 +263,11 @@ export class ProtocolCodeGenerator {
 
     const objectCodeGenerator = new ObjectCodeGenerator(
       packetTypeName,
-      this.typeFactory
+      this.typeFactory,
     );
     getInstructions(protocolPacket).forEach(
       objectCodeGenerator.generateInstruction,
-      objectCodeGenerator
+      objectCodeGenerator,
     );
 
     const familyTsDoc = `/**
@@ -294,7 +294,7 @@ export class ProtocolCodeGenerator {
         .addStatement(`return ${familyType.name}.${familyEnumValue.name}`)
         .unindent()
         .addLine("}")
-        .addImportByType(familyType)
+        .addImportByType(familyType),
     );
     data.addMethod(
       new CodeBlock()
@@ -304,7 +304,7 @@ export class ProtocolCodeGenerator {
         .addStatement(`return ${actionType.name}.${actionEnumValue.name}`)
         .unindent()
         .addLine("}")
-        .addImportByType(actionType)
+        .addImportByType(actionType),
     );
     data.addMethod(
       new CodeBlock()
@@ -312,7 +312,7 @@ export class ProtocolCodeGenerator {
         .indent()
         .addStatement(`return ${packetTypeName}.family`)
         .unindent()
-        .addLine("}")
+        .addLine("}"),
     );
     data.addMethod(
       new CodeBlock()
@@ -320,7 +320,7 @@ export class ProtocolCodeGenerator {
         .indent()
         .addStatement(`return ${packetTypeName}.action`)
         .unindent()
-        .addLine("}")
+        .addLine("}"),
     );
     data.addMethod(
       new CodeBlock()
@@ -328,12 +328,12 @@ export class ProtocolCodeGenerator {
         .indent()
         .addStatement(`${packetTypeName}.serialize(writer, this)`)
         .unindent()
-        .addLine("}")
+        .addLine("}"),
     );
 
     const relativePath = path.posix.join(
       sourcePath,
-      pascalCaseToKebabCase(packetTypeName)
+      pascalCaseToKebabCase(packetTypeName),
     );
     this.exports.push(relativePath);
 
@@ -341,7 +341,7 @@ export class ProtocolCodeGenerator {
       relativePath + ".ts",
       new CodeBlock()
         .addCodeBlock(generateTsDoc(getComment(protocolPacket)))
-        .addCodeBlock(objectCodeGenerator.code)
+        .addCodeBlock(objectCodeGenerator.code),
     );
   }
 
@@ -360,7 +360,7 @@ export class ProtocolCodeGenerator {
     const codeBlock = new CodeBlock();
     this.exports.forEach((relativePath) => {
       codeBlock.addLine(
-        `export * from "${path.posix.join("@eolib", relativePath)}"`
+        `export * from "${path.posix.join("@eolib", relativePath)}"`,
       );
     });
     const generatedIndex = new TSFile("protocol/generated-index.ts", codeBlock);
