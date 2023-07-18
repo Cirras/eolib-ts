@@ -14,11 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
         with:
-          fetch-depth: 0
-
-      - name: Check format with Prettier
-        uses: creyD/prettier_action@v4.3
+          fetch-depth: 0 
+      - name: Setup Node
+        uses: actions/setup-node@v3
         with:
-          dry: true
-          prettier_options: --write **/*.{ts,md}
-          only_changed: ${{github.event_name == 'pull_request'}}
+          node-version: 18
+          cache: npm
+      - name: Check format with Prettier
+        run: |
+          npm ci
+          npx prettier --check **/*.{ts,md}
