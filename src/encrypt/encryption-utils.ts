@@ -4,7 +4,7 @@
  * Used when encrypting packets and data files.
  *
  * @example
- *   {1, 2, 3, 4, 5} → {0, 5, 1, 4, 2, 3}
+ *   {0, 1, 2, 3, 4, 5} → {0, 5, 1, 4, 2, 3}
  *
  * @remarks
  * This is an in-place operation.
@@ -39,7 +39,7 @@ export function interleave(data: Uint8Array): void {
  * Used when decrypting packets and data files.
  *
  * @example
- *   {1, 2, 3, 4, 5} → {0, 2, 4, 5, 3, 1}
+ *   {0, 1, 2, 3, 4, 5} → {0, 2, 4, 5, 3, 1}
  *
  * @remarks
  * This is an in-place operation.
