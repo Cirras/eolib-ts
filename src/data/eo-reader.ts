@@ -220,7 +220,7 @@ export class EoReader {
    */
   public get remaining(): number {
     if (this.chunkedReadingMode) {
-      return this.nextBreak - this.position;
+      return this.nextBreak - Math.min(this.position, this.nextBreak);
     } else {
       return this.data.length - this.position;
     }
