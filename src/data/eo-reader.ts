@@ -28,6 +28,46 @@ export class EoReader {
   }
 
   /**
+   * Creates a new `EoReader` whose input data is a shared subsequence of this reader's data.
+   *
+   * <p>The input data of the new reader will start at position `index` in this reader and contain
+   * all remaining data. The two reader's position and chunked reading mode will be independent.
+   *
+   * <p>The new reader's position will be zero, and its chunked reading mode will be false.
+   *
+   * @param [index] - the position in this reader at which the data of the new reader will start;
+   *     must be non-negative. Defaults to the current reader position.
+   * @param [length] - the length of the shared subsequence of data to supply to the new reader;
+   *     must be non-negative. Defaults to the length of the remaining data starting from `index`.
+   * @throws `Error` if `index` or `length` is negative. <br>
+   *     This exception will **not** be thrown if `index + length` is greater than the size of the
+   *     input data. Consistent with the existing over-read behaviors, the new reader will be
+   *     supplied a shared subsequence of all remaining data starting from `index`.
+   * @returns The new reader
+   */
+  public slice(
+    index: number = this.position,
+    length: number = Math.max(0, this.data.length - index),
+  ): EoReader {
+    if (index < 0) {
+      throw new Error("negative index: " + index);
+    }
+
+    if (length < 0) {
+      throw new Error("negative length: " + length);
+    }
+
+    let begin = Math.max(0, Math.min(this.data.length, index));
+    let end = begin + Math.min(this.data.length - begin, length);
+
+    if (begin === end) {
+      return new EoReader(new Uint8Array([]));
+    } else {
+      return new EoReader(this.data.subarray(begin, end));
+    }
+  }
+
+  /**
    * Reads a raw byte from the input data.
    *
    * @returns A raw byte

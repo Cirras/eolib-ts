@@ -3,6 +3,51 @@ import { EoReader } from "@eolib/data/eo-reader";
 import * as windows1252 from "windows-1252";
 
 describe("EoReader", () => {
+  describe("#slice()", () => {
+    it("should return a reader at the specified offset and length", () => {
+      const reader = readerFromBytes(0x01, 0x02, 0x03, 0x04, 0x05, 0x06);
+      reader.getByte();
+      reader.chunkedReadingMode = true;
+
+      const reader2 = reader.slice();
+      expect(reader2.position).toBe(0);
+      expect(reader2.remaining).toBe(5);
+      expect(reader2.chunkedReadingMode).toBe(false);
+
+      const reader3 = reader2.slice(1);
+      expect(reader3.position).toBe(0);
+      expect(reader3.remaining).toBe(4);
+      expect(reader3.chunkedReadingMode).toBe(false);
+
+      const reader4 = reader3.slice(1, 2);
+      expect(reader4.position).toBe(0);
+      expect(reader4.remaining).toBe(2);
+      expect(reader4.chunkedReadingMode).toBe(false);
+
+      expect(reader.position).toBe(1);
+      expect(reader.remaining).toBe(5);
+      expect(reader.chunkedReadingMode).toBe(true);
+    });
+
+    it("should allow over-read", () => {
+      const reader = readerFromBytes(0x01, 0x02, 0x03);
+      expect(reader.slice(2, 5).remaining).toBe(1);
+      expect(reader.slice(3).remaining).toBe(0);
+      expect(reader.slice(4).remaining).toBe(0);
+      expect(reader.slice(4, 12345).remaining).toBe(0);
+    });
+
+    it("should thow an error when a negative index is provided", () => {
+      const reader = readerFromBytes(0x01, 0x02, 0x03);
+      expect(() => reader.slice(-1)).toThrow();
+    });
+
+    it("should thow an error when a negative length is provided", () => {
+      const reader = readerFromBytes(0x01, 0x02, 0x03);
+      expect(() => reader.slice(0, -1)).toThrow();
+    });
+  });
+
   describe("#getByte()", () => {
     it("should return raw 1-byte values", () => {
       const bytes = [0x00, 0x01, 0x02, 0x80, 0xfd, 0xfe, 0xff];
