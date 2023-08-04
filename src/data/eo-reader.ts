@@ -31,7 +31,7 @@ export class EoReader {
    * Creates a new `EoReader` whose input data is a shared subsequence of this reader's data.
    *
    * <p>The input data of the new reader will start at position `index` in this reader and contain
-   * all remaining data. The two reader's position and chunked reading mode will be independent.
+   * up to `length` bytes. The two reader's position and chunked reading mode will be independent.
    *
    * <p>The new reader's position will be zero, and its chunked reading mode will be false.
    *
