@@ -145,7 +145,8 @@ export class ObjectCodeGenerator {
     const tsDoc = `/**
  * Deserializes an instance of \`${className}\` from the provided \`EoReader\`.
  *
- * @param writer - the writer that the data will be serialized to
+ * @param reader - the reader that the data will be deserialized from
+ * @returns The deserialized data
  */
 `;
 
