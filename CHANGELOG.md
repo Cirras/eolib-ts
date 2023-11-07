@@ -5,14 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## Unreleased
+
+## 1.0.0 - 2023-11-07
 
 ### Added
 
 - `BankAddClientPacket.sessionId` field.
 - `BankTakeClientPacket.sessionId` field.
 
-## [1.0.0-rc.7] - 2023-08-04
+## 1.0.0-rc.7 - 2023-08-04
 
 ### Added
 
@@ -30,7 +32,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix incorrect (de)serialization of `NpcRangeRequestClientPacket`.
 - Fix bug where `EoReader.remaining` could return a negative number.
 
-## [1.0.0-rc.6] - 2023-06-21
+## 1.0.0-rc.6 - 2023-06-21
 
 ### Changed
 
@@ -49,7 +51,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Import resolution failures when consuming the library as an ESM.
 
-## [1.0.0-rc.5] - 2023-05-13
+## 1.0.0-rc.5 - 2023-05-13
 
 ### Added
 
@@ -63,7 +65,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Change incorrect `ChestReplyServerPacket.remainingAmount` field type from `short` to `int`.
 
-## [1.0.0-rc.4] - 2023-05-02
+## 1.0.0-rc.4 - 2023-05-02
 
 ### Added
 
@@ -85,7 +87,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Change incorrect `ByteCoords.x` field type from `short` to `byte`.
 - Change incorrect `ByteCoords.y` field type from `short` to `byte`.
 
-## [1.0.0-rc.3] - 2023-04-08
+## 1.0.0-rc.3 - 2023-04-08
 
 ### Added
 
@@ -111,7 +113,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Change incorrect `LockerGetServerPacket.takenItem` field type from `Item` to `ThreeItem`.
 
-## [1.0.0-rc.2] - 2023-02-16
+## 1.0.0-rc.2 - 2023-02-16
 
 ### Added
 
@@ -158,7 +160,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Roll `InitInitServerPacket.ReplyCodeDataPlayersList` fields into new `playersList` field.
 - Roll `InitInitServerPacket.ReplyCodeDataPlayersListFriends` fields into new `playersList` field.
 
-## [1.0.0-rc.1] - 2023-02-09
+## 1.0.0-rc.1 - 2023-02-09
 
 ### Added
 
@@ -171,6 +173,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Endless Spell Files (ESF)
   - Endless Class Files (ECF)
 - Utilities:
+
   - Data reader
   - Data writer
   - Number encoding
@@ -178,11 +181,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Data encryption
   - Packet sequencer
 
-[Unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.7...HEAD
-[1.0.0-rc.7]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.6...v1.0.0-rc.7
-[1.0.0-rc.6]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.5...v1.0.0-rc.6
-[1.0.0-rc.5]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.4...v1.0.0-rc.5
-[1.0.0-rc.4]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.3...v1.0.0-rc.4
-[1.0.0-rc.3]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.2...v1.0.0-rc.3
-[1.0.0-rc.2]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.1...v1.0.0-rc.2
-[1.0.0-rc.1]: https://github.com/cirras/eolib-ts/releases/tag/v1.0.0-rc.1
+  [Unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.7...HEAD
+  [1.0.0-rc.7]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.6...v1.0.0-rc.7
+  [1.0.0-rc.6]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.5...v1.0.0-rc.6
+  [1.0.0-rc.5]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.4...v1.0.0-rc.5
+  [1.0.0-rc.4]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.3...v1.0.0-rc.4
+  [1.0.0-rc.3]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.2...v1.0.0-rc.3
+  [1.0.0-rc.2]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.1...v1.0.0-rc.2
