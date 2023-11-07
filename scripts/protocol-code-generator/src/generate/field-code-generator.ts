@@ -113,10 +113,8 @@ class FieldCodeGenerator {
           `Unbounded element type (${this.typeString}) forbidden in non-delimited array.`,
         );
       }
-    } else {
-      if (this.delimited) {
-        throw new Error("Only arrays can be delimited.");
-      }
+    } else if (this.delimited) {
+      throw new Error("Only arrays can be delimited.");
     }
 
     if (!this.delimited && this.trailingDelimiter) {
@@ -138,10 +136,8 @@ class FieldCodeGenerator {
           `${type.name} is not a numeric type, so it is not allowed for a length field.`,
         );
       }
-    } else {
-      if (this.offset !== 0) {
-        throw new Error("Only length fields can have an offset.");
-      }
+    } else if (this.offset !== 0) {
+      throw new Error("Only length fields can have an offset.");
     }
   }
 
