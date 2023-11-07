@@ -114,7 +114,7 @@ export class TypeFactory {
       case 1:
         return null;
 
-      case 2:
+      case 2: {
         const typeName: string = parts[0];
         const underlyingTypeName: string = parts[1];
         if (typeName === underlyingTypeName) {
@@ -130,6 +130,7 @@ export class TypeFactory {
           );
         }
         return underlyingType;
+      }
 
       default:
         throw new Error(
@@ -366,14 +367,16 @@ export class TypeFactory {
       }
 
       switch (instruction.name) {
-        case "field":
+        case "field": {
           const fieldType = this.getType(
             getRequiredStringAttribute(instruction, "type"),
             TypeFactory.createTypeLengthForField(instruction),
           );
           result = fieldType.bounded;
           break;
-        case "array":
+        }
+
+        case "array": {
           const elementType = this.getType(
             getRequiredStringAttribute(instruction, "type"),
           );
@@ -381,12 +384,15 @@ export class TypeFactory {
             elementType.bounded &&
             getStringAttribute(instruction, "length") !== null;
           break;
-        case "dummy":
+        }
+
+        case "dummy": {
           const dummyType = this.getType(
             getRequiredStringAttribute(instruction, "type"),
           );
           result = dummyType.bounded;
           break;
+        }
       }
     }
 
