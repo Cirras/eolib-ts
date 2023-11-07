@@ -210,9 +210,9 @@ export class TypeFactory {
 
       if (ordinal === null) {
         throw new Error(
-          `${enumName}.${valueName} has invalid ordinal value \"${getText(
+          `${enumName}.${valueName} has invalid ordinal value "${getText(
             protocolValue,
-          )}\"`,
+          )}"`,
         );
       }
 
