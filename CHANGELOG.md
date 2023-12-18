@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.1] - 2023-12-18
+
 ### Changed
 
 - Remove trailing break from `ArenaSpecServerPacket`.
@@ -185,7 +187,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Data encryption
   - Packet sequencer
 
-[Unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.0...HEAD
+[Unreleased]: https://github.com/cirras/eolib-ts/compare/v1.0.1...HEAD
+[1.0.1]: https://github.com/cirras/eolib-ts/compare/v1.0.0...v1.0.1
 [1.0.0]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.7...v1.0.0
 [1.0.0-rc.7]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.6...v1.0.0-rc.7
 [1.0.0-rc.6]: https://github.com/cirras/eolib-ts/compare/v1.0.0-rc.5...v1.0.0-rc.6
