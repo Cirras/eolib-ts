@@ -134,7 +134,14 @@ export class ObjectCodeGenerator {
     }
 
     return result
+      .addStatement(
+        "const oldStringSanitizationMode = writer.stringSanitizationMode",
+      )
+      .beginControlFlow("try")
       .addCodeBlock(this.data.serialize)
+      .nextControlFlow("finally")
+      .addStatement("writer.stringSanitizationMode = oldStringSanitizationMode")
+      .endControlFlow()
       .unindent()
       .addLine("}")
       .addImport("EoWriter", "data/eo-writer");
@@ -336,6 +343,7 @@ export class ObjectCodeGenerator {
     if (!wasAlreadyEnabled) {
       this.context.chunkedReadingEnabled = true;
       this.data.deserialize.addStatement("reader.chunkedReadingMode = true");
+      this.data.serialize.addStatement("writer.stringSanitizationMode = true");
     }
 
     getInstructions(protocolChunked).forEach(this.generateInstruction, this);
@@ -343,6 +351,7 @@ export class ObjectCodeGenerator {
     if (!wasAlreadyEnabled) {
       this.context.chunkedReadingEnabled = false;
       this.data.deserialize.addStatement("reader.chunkedReadingMode = false");
+      this.data.serialize.addStatement("writer.stringSanitizationMode = false");
     }
   }
 
