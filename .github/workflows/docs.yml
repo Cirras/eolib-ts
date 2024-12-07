@@ -22,7 +22,7 @@ jobs:
           mkdir -p ./docs
           tar -cvf documentation.tar ./docs
       - name: Upload existing docs artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: documentation
           path: documentation.tar
@@ -38,7 +38,7 @@ jobs:
           submodules: true
       - run: mkdir -p ./docs
       - name: Download existing docs artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: documentation
       - name: Extract existing docs
@@ -57,7 +57,7 @@ jobs:
       - name: Archive docs
         run: tar -cvf newdocumentation.tar ./docs
       - name: Upload docs artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: newdocumentation
           path: newdocumentation.tar
@@ -72,7 +72,7 @@ jobs:
           ref: gh-pages
       - run: mkdir -p ./docs
       - name: Download new docs artifact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
           name: newdocumentation
           path: /tmp
