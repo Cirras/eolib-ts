@@ -116,10 +116,6 @@ class FieldCodeGenerator {
     } else if (this.delimited) {
       throw new Error("Only arrays can be delimited.");
     }
-
-    if (!this.delimited && this.trailingDelimiter) {
-      throw new Error("Only delimited arrays can have a trailing delimiter.");
-    }
   }
 
   private validateLengthField(): void {

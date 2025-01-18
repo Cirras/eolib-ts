@@ -220,7 +220,7 @@ export class ObjectCodeGenerator {
       .arrayField(true)
       .delimited(delimited)
       .trailingDelimiter(
-        getBooleanAttribute(protocolArray, "trailing-delimiter"),
+        getBooleanAttribute(protocolArray, "trailing-delimiter", true),
       )
       .build();
 
