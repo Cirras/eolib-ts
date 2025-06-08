@@ -1,2 +1,2 @@
-export * from "./encryption-utils";
-export * from "./server-verification-utils";
+export * from "./encryption-utils.js";
+export * from "./server-verification-utils.js";

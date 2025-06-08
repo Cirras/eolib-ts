@@ -1,4 +1,4 @@
-import { AccountReplySequenceStart } from "@eolib/packet/account-reply-sequence-start";
+import { AccountReplySequenceStart } from "@eolib/packet/account-reply-sequence-start.js";
 
 describe("AccountReplySequenceStart", () => {
   describe("#fromValue()", () => {

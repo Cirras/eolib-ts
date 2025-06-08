@@ -1,4 +1,7 @@
-import { decodeNumber, encodeNumber } from "@eolib/data/number-encoding-utils";
+import {
+  decodeNumber,
+  encodeNumber,
+} from "@eolib/data/number-encoding-utils.js";
 
 const TEST_DATA = [
   { decoded: 0, encoded: [0x01, 0xfe, 0xfe, 0xfe] },

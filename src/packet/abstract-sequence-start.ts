@@ -1,4 +1,4 @@
-import type { SequenceStart } from "./sequence-start";
+import type { SequenceStart } from "./sequence-start.js";
 
 /**
  * A value sent by the server to update the client's sequence start, also known as the "starting

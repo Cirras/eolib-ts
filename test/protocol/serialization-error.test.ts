@@ -1,4 +1,4 @@
-import { SerializationError } from "@eolib/index";
+import { SerializationError } from "@eolib/index.js";
 
 describe("SerializationError", () => {
   describe("#message", () => {

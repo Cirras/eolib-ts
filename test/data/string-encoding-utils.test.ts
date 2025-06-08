@@ -1,4 +1,7 @@
-import { decodeString, encodeString } from "@eolib/data/string-encoding-utils";
+import {
+  decodeString,
+  encodeString,
+} from "@eolib/data/string-encoding-utils.js";
 
 import * as windows1252 from "windows-1252";
 

@@ -1,6 +1,11 @@
-import { encodeNumber } from "./number-encoding-utils";
-import { encodeString } from "./string-encoding-utils";
-import { CHAR_MAX, SHORT_MAX, THREE_MAX, INT_MAX } from "./eo-numeric-limits";
+import { encodeNumber } from "./number-encoding-utils.js";
+import { encodeString } from "./string-encoding-utils.js";
+import {
+  CHAR_MAX,
+  SHORT_MAX,
+  THREE_MAX,
+  INT_MAX,
+} from "./eo-numeric-limits.js";
 
 import * as windows1252 from "windows-1252";
 

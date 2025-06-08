@@ -1,4 +1,4 @@
-export * from "./serialization-error";
-export * from "./net/packet";
+export * from "./serialization-error.js";
+export * from "./net/packet.js";
 
-export * from "@eolib/protocol/generated-index";
+export * from "@eolib/protocol/generated-index.js";

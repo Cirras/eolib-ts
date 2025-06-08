@@ -1,4 +1,4 @@
-import { InitSequenceStart } from "@eolib/packet/init-sequence-start";
+import { InitSequenceStart } from "@eolib/packet/init-sequence-start.js";
 
 const VALUE = 879;
 const SEQ1 = 110;

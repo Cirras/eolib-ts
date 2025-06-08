@@ -1,6 +1,6 @@
-import { CHAR_MAX } from "@eolib/data/eo-numeric-limits";
-import { AbstractSequenceStart } from "./abstract-sequence-start";
-import { randBetween } from "./random-utils";
+import { CHAR_MAX } from "@eolib/data/eo-numeric-limits.js";
+import { AbstractSequenceStart } from "./abstract-sequence-start.js";
+import { randBetween } from "./random-utils.js";
 
 /**
  * A class representing the sequence start value sent with the CONNECTION_PLAYER server packet.

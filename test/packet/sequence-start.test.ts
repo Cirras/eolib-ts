@@ -1,4 +1,4 @@
-import { SequenceStart } from "@eolib/packet/sequence-start";
+import { SequenceStart } from "@eolib/packet/sequence-start.js";
 
 describe("SequenceStart", () => {
   describe("#zero()", () => {

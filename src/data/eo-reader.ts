@@ -1,5 +1,5 @@
-import { decodeNumber } from "./number-encoding-utils";
-import { decodeString } from "./string-encoding-utils";
+import { decodeNumber } from "./number-encoding-utils.js";
+import { decodeString } from "./string-encoding-utils.js";
 
 import * as windows1252 from "windows-1252";
 

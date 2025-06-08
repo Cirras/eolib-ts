@@ -3,8 +3,8 @@ import {
   INT_MAX,
   SHORT_MAX,
   THREE_MAX,
-} from "@eolib/data/eo-numeric-limits";
-import { EoWriter } from "@eolib/data/eo-writer";
+} from "@eolib/data/eo-numeric-limits.js";
+import { EoWriter } from "@eolib/data/eo-writer.js";
 
 describe("EoWriter", () => {
   describe("#addByte()", () => {

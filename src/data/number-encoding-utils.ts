@@ -1,4 +1,4 @@
-import { CHAR_MAX, SHORT_MAX, THREE_MAX } from "./eo-numeric-limits";
+import { CHAR_MAX, SHORT_MAX, THREE_MAX } from "./eo-numeric-limits.js";
 
 /**
  * Encodes a number to a sequence of bytes.

@@ -1,4 +1,4 @@
-import { PingSequenceStart } from "@eolib/packet/ping-sequence-start";
+import { PingSequenceStart } from "@eolib/packet/ping-sequence-start.js";
 
 const VALUE = 879;
 const SEQ1 = 1005;

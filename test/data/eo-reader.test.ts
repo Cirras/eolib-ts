@@ -1,4 +1,4 @@
-import { EoReader } from "@eolib/data/eo-reader";
+import { EoReader } from "@eolib/data/eo-reader.js";
 
 import * as windows1252 from "windows-1252";
 

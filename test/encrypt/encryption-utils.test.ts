@@ -3,7 +3,7 @@ import {
   flipMsb,
   interleave,
   swapMultiples,
-} from "@eolib/encrypt/encryption-utils";
+} from "@eolib/encrypt/encryption-utils.js";
 
 import * as windows1252 from "windows-1252";
 

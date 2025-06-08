@@ -1,4 +1,4 @@
-import { AbstractSequenceStart } from "./abstract-sequence-start";
+import { AbstractSequenceStart } from "./abstract-sequence-start.js";
 
 /**
  * A value sent by the server to update the client's sequence start, also known as the "starting

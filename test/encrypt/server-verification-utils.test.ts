@@ -1,5 +1,5 @@
-import { THREE_MAX } from "@eolib/data/eo-numeric-limits";
-import { serverVerificationHash } from "@eolib/encrypt/server-verification-utils";
+import { THREE_MAX } from "@eolib/data/eo-numeric-limits.js";
+import { serverVerificationHash } from "@eolib/encrypt/server-verification-utils.js";
 
 const TEST_DATA = [
   { challenge: 0, hash: 114000 },
