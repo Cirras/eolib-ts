@@ -385,7 +385,7 @@ class FieldCodeGenerator {
         `throw new SerializationError("${tsName} must not be null.")`,
       )
       .endControlFlow()
-      .addImport("SerializationError", "protocol/serialization-error");
+      .addImport("SerializationError", "protocol/serialization-error.js");
   }
 
   private generateSerializeLengthCheck(): void {
@@ -430,7 +430,7 @@ class FieldCodeGenerator {
       )
       .addStatement(`throw new SerializationError(\`${errorMessage}\`)`)
       .endControlFlow()
-      .addImport("SerializationError", "protocol/serialization-error");
+      .addImport("SerializationError", "protocol/serialization-error.js");
   }
 
   private getWriteStatement(): CodeBlock {

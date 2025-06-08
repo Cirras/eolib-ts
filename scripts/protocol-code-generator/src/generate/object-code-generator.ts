@@ -144,7 +144,7 @@ export class ObjectCodeGenerator {
       .endControlFlow()
       .unindent()
       .addLine("}")
-      .addImport("EoWriter", "data/eo-writer");
+      .addImport("EoWriter", "data/eo-writer.js");
   }
 
   private generateDeserializeMethod(): CodeBlock {
@@ -173,7 +173,7 @@ export class ObjectCodeGenerator {
       .endControlFlow()
       .unindent()
       .addLine("}")
-      .addImport("EoReader", "data/eo-reader");
+      .addImport("EoReader", "data/eo-reader.js");
   }
 
   private generateField(protocolField: XmlElement): void {

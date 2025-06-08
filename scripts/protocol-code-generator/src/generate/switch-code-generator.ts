@@ -144,7 +144,7 @@ export class SwitchCodeGenerator {
             ")",
         )
         .endControlFlow()
-        .addImport("SerializationError", "protocol/serialization-error");
+        .addImport("SerializationError", "protocol/serialization-error.js");
 
       this.data.deserialize.addStatement(`data._${caseDataFieldName} = null`);
     } else {
@@ -166,7 +166,7 @@ export class SwitchCodeGenerator {
         .addStatement(
           `${this.data.className}.${caseDataTypeName}.serialize(writer, data._${caseDataFieldName})`,
         )
-        .addImport("SerializationError", "protocol/serialization-error");
+        .addImport("SerializationError", "protocol/serialization-error.js");
 
       this.data.deserialize.addStatement(
         `data._${caseDataFieldName} = ${this.data.className}.${caseDataTypeName}.deserialize(reader)`,

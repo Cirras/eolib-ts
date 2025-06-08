@@ -190,7 +190,7 @@ export class ProtocolCodeGenerator {
       type.sourcePath,
       pascalCaseToKebabCase(type.name),
     );
-    this.exports.push(relativePath);
+    this.exports.push(relativePath + ".js");
 
     return new TSFile(relativePath + ".ts", codeBlock);
   }
@@ -216,7 +216,7 @@ export class ProtocolCodeGenerator {
       type.sourcePath,
       pascalCaseToKebabCase(type.name),
     );
-    this.exports.push(relativePath);
+    this.exports.push(relativePath + ".js");
 
     return new TSFile(
       relativePath + ".ts",
@@ -335,7 +335,7 @@ export class ProtocolCodeGenerator {
       sourcePath,
       pascalCaseToKebabCase(packetTypeName),
     );
-    this.exports.push(relativePath);
+    this.exports.push(relativePath + ".js");
 
     return new TSFile(
       relativePath + ".ts",
