@@ -1,6 +1,5 @@
 import { EoReader } from "@eolib/data/eo-reader.js";
-
-import * as windows1252 from "windows-1252";
+import { encode1252 } from "@eolib/data/windows-1252.js";
 
 describe("EoReader", () => {
   describe("#slice()", () => {
@@ -366,18 +365,9 @@ describe("EoReader", () => {
 });
 
 function readerFromString(str: string): EoReader {
-  return new EoReader(toBytes(str));
+  return new EoReader(encode1252(str));
 }
 
 function readerFromBytes(...bytes: number[]): EoReader {
   return new EoReader(new Uint8Array(bytes));
-}
-
-function toBytes(str: string): Uint8Array {
-  const encodedUint16 = windows1252.encode(str);
-  const result = new Uint8Array(encodedUint16.length);
-  for (let i = 0; i < encodedUint16.length; ++i) {
-    result[i] = encodedUint16[i];
-  }
-  return result;
 }

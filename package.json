@@ -65,8 +65,5 @@
     "typedoc": "~0.23.28",
     "typedoc-plugin-versions": "^0.2.4",
     "typescript": "^4.9.5"
-  },
-  "dependencies": {
-    "windows-1252": "^3.0.4"
   }
 }

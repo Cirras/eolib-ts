@@ -1,7 +1,6 @@
 import { decodeNumber } from "./number-encoding-utils.js";
 import { decodeString } from "./string-encoding-utils.js";
-
-import * as windows1252 from "windows-1252";
+import { decode1252 } from "./windows-1252.js";
 
 /**
  * A class for reading EO data from a sequence of bytes.
@@ -288,6 +287,6 @@ export class EoReader {
   }
 
   private static decodeAnsi(bytes: Uint8Array): string {
-    return windows1252.decode(bytes);
+    return decode1252(bytes);
   }
 }

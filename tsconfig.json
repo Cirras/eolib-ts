@@ -1,6 +1,5 @@
 {
   "include": ["src/**/*", "generated/**/*"],
-  "exclude": ["src/@types/**/*"],
   "rootDirs": ["src", "generated"],
   "compilerOptions": {
     "lib": ["ES6", "DOM"],
@@ -19,8 +18,7 @@
     "resolveJsonModule": true,
     "baseUrl": ".",
     "paths": {
-      "@eolib/*": ["src/*", "generated/*"],
-      "windows-1252": ["src/@types/windows-1252.d.ts"]
+      "@eolib/*": ["src/*", "generated/*"]
     }
   }
 }

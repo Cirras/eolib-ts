@@ -4,8 +4,7 @@ import {
   interleave,
   swapMultiples,
 } from "@eolib/encrypt/encryption-utils.js";
-
-import * as windows1252 from "windows-1252";
+import { encode1252 } from "@eolib/data/windows-1252.js";
 
 describe("interleave()", function () {
   const TEST_DATA = [
@@ -41,9 +40,9 @@ describe("interleave()", function () {
 
   TEST_DATA.forEach((data) => {
     it(`should interleave "${data.input}" to "${data.interleaved}"`, function () {
-      const bytes = toBytes(data.input);
+      const bytes = encode1252(data.input);
       interleave(bytes);
-      expect(bytes).toStrictEqual(toBytes(data.interleaved));
+      expect(bytes).toStrictEqual(encode1252(data.interleaved));
     });
   });
 });
@@ -82,9 +81,9 @@ describe("deinterleave()", function () {
 
   TEST_DATA.forEach((data) => {
     it(`should interleave "${data.input}" to "${data.deinterleaved}"`, function () {
-      const bytes = toBytes(data.input);
+      const bytes = encode1252(data.input);
       deinterleave(bytes);
-      expect(bytes).toStrictEqual(toBytes(data.deinterleaved));
+      expect(bytes).toStrictEqual(encode1252(data.deinterleaved));
     });
   });
 });
@@ -126,9 +125,9 @@ describe("flipMsb()", function () {
 
   TEST_DATA.forEach((data) => {
     it(`should flip "${data.input}" to "${data.flipped}"`, function () {
-      const bytes = toBytes(data.input);
+      const bytes = encode1252(data.input);
       flipMsb(bytes);
-      expect(bytes).toStrictEqual(toBytes(data.flipped));
+      expect(bytes).toStrictEqual(encode1252(data.flipped));
     });
   });
 });
@@ -167,17 +166,17 @@ describe("swapMultiples()", function () {
 
   TEST_DATA.forEach((data) => {
     it(`should swap "${data.input}" to "${data.swapped}" with multiple 3`, function () {
-      const bytes = toBytes(data.input);
+      const bytes = encode1252(data.input);
       swapMultiples(bytes, 3);
-      expect(bytes).toStrictEqual(toBytes(data.swapped));
+      expect(bytes).toStrictEqual(encode1252(data.swapped));
     });
   });
 
   TEST_DATA.forEach((data) => {
     it(`should not swap "${data.input}" with multiple 0`, function () {
-      const bytes = toBytes(data.input);
+      const bytes = encode1252(data.input);
       swapMultiples(bytes, 0);
-      expect(bytes).toStrictEqual(toBytes(data.input));
+      expect(bytes).toStrictEqual(encode1252(data.input));
     });
   });
 
@@ -185,12 +184,3 @@ describe("swapMultiples()", function () {
     expect(() => swapMultiples(new Uint8Array([1, 2, 3, 4, 5]), -1)).toThrow();
   });
 });
-
-function toBytes(str: string): Uint8Array {
-  const encodedUint16 = windows1252.encode(str);
-  const result = new Uint8Array(encodedUint16.length);
-  for (let i = 0; i < encodedUint16.length; ++i) {
-    result[i] = encodedUint16[i];
-  }
-  return result;
-}

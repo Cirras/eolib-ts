@@ -2,8 +2,7 @@ import {
   decodeString,
   encodeString,
 } from "@eolib/data/string-encoding-utils.js";
-
-import * as windows1252 from "windows-1252";
+import { encode1252 } from "@eolib/data/windows-1252.js";
 
 const TEST_DATA = [
   {
@@ -35,9 +34,9 @@ const TEST_DATA = [
 describe("encodeString()", () => {
   TEST_DATA.forEach((data) => {
     it(`should encode "${data.decoded}" to "${data.encoded}"`, () => {
-      const bytes = toBytes(data.decoded);
+      const bytes = encode1252(data.decoded);
       encodeString(bytes);
-      expect(bytes).toEqual(toBytes(data.encoded));
+      expect(bytes).toEqual(encode1252(data.encoded));
     });
   });
 });
@@ -45,18 +44,9 @@ describe("encodeString()", () => {
 describe("decodeString()", function () {
   TEST_DATA.forEach((data) => {
     it(`should decode "${data.encoded}" to "${data.decoded}"`, function () {
-      const bytes = toBytes(data.encoded);
+      const bytes = encode1252(data.encoded);
       decodeString(bytes);
-      expect(bytes).toEqual(toBytes(data.decoded));
+      expect(bytes).toEqual(encode1252(data.decoded));
     });
   });
 });
-
-function toBytes(str: string): Uint8Array {
-  const encodedUint16 = windows1252.encode(str);
-  const result = new Uint8Array(encodedUint16.length);
-  for (let i = 0; i < encodedUint16.length; ++i) {
-    result[i] = encodedUint16[i];
-  }
-  return result;
-}
