@@ -5,8 +5,8 @@
       "name": "Generate Protocol Code",
       "type": "node",
       "request": "launch",
-      "runtimeExecutable": "node",
-      "runtimeArgs": ["--nolazy", "-r", "ts-node/register/transpile-only"],
+      "runtimeExecutable": "tsx",
+      "runtimeArgs": ["--no-warnings"],
 
       "args": ["scripts/generate-protocol-code.ts"],
 

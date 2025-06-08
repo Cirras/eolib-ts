@@ -24,16 +24,16 @@
     "clean": "rm -rf ./lib && rm -rf ./generated",
     "format": "prettier --cache --write **/*.{js,ts,md}",
     "build": "npm run clean && npm run build:esm && npm run build:cjs",
-    "build:esm": "npm run generate && tsc -p ./config/tsconfig.esm.json && ts-node scripts/post-build.ts esm",
-    "build:cjs": "npm run generate && tsc -p ./config/tsconfig.cjs.json && ts-node scripts/post-build.ts cjs",
-    "generate": "ts-node scripts/generate-protocol-code.ts",
+    "build:esm": "npm run generate && tsc -p ./config/tsconfig.esm.json && tsx scripts/post-build.ts esm",
+    "build:cjs": "npm run generate && tsc -p ./config/tsconfig.cjs.json && tsx scripts/post-build.ts cjs",
+    "generate": "tsx scripts/generate-protocol-code.ts",
     "test": "vitest run",
     "test:coverage": "vitest run --coverage",
     "docs": "typedoc",
     "prepack": "npm run build",
     "prepare": "husky",
     "pre-commit": "lint-staged",
-    "version": "ts-node scripts/bump-changelog-version.ts && git add CHANGELOG.md"
+    "version": "tsx scripts/bump-changelog-version.ts && git add CHANGELOG.md"
   },
   "publishConfig": {
     "access": "public"
@@ -58,9 +58,9 @@
     "keep-a-changelog": "^2.6.2",
     "lint-staged": "^16.1.0",
     "prettier": "^3.5.3",
-    "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.19.4",
     "typedoc": "~0.23.28",
     "typedoc-plugin-versions": "^0.2.4",
     "typescript": "^4.9.5",
