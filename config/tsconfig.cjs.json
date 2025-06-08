@@ -1,5 +1,6 @@
 {
   "extends": "../tsconfig.json",
+  "exclude": ["../test/**/*"],
   "compilerOptions": {
     "module": "CommonJS",
     "outDir": "../lib/cjs",

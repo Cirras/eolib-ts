@@ -4,6 +4,8 @@ import {
 } from "@eolib/data/string-encoding-utils.js";
 import { encode1252 } from "@eolib/data/windows-1252.js";
 
+import { describe, it, expect } from "vitest";
+
 const TEST_DATA = [
   {
     decoded: "Hello, World!",

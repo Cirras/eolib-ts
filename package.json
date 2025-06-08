@@ -27,8 +27,8 @@
     "build:esm": "npm run generate && tsc -p ./config/tsconfig.esm.json && ts-node scripts/post-build.ts esm",
     "build:cjs": "npm run generate && tsc -p ./config/tsconfig.cjs.json && ts-node scripts/post-build.ts cjs",
     "generate": "ts-node scripts/generate-protocol-code.ts",
-    "test": "jest --verbose",
-    "test:coverage": "jest --verbose --coverage",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
     "docs": "typedoc",
     "prepack": "npm run build",
     "prepare": "husky",
@@ -51,19 +51,20 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.27.1",
     "@rgrove/parse-xml": "^4.2.0",
-    "@types/jest": "^29.5.14",
+    "@vitest/coverage-istanbul": "^3.2.2",
+    "@vitest/ui": "^3.2.2",
     "chalk": "^4.1.1",
     "husky": "^9.1.7",
-    "jest": "^29.7.0",
     "keep-a-changelog": "^2.6.2",
     "lint-staged": "^16.1.0",
     "prettier": "^3.5.3",
-    "ts-jest": "^29.1.1",
     "ts-node": "^10.9.2",
     "tsc-alias": "^1.8.16",
     "tsconfig-paths": "^4.2.0",
     "typedoc": "~0.23.28",
     "typedoc-plugin-versions": "^0.2.4",
-    "typescript": "^4.9.5"
+    "typescript": "^4.9.5",
+    "vite-tsconfig-paths": "^5.1.4",
+    "vitest": "^3.2.2"
   }
 }

@@ -1,6 +1,8 @@
 import { THREE_MAX } from "@eolib/data/eo-numeric-limits.js";
 import { serverVerificationHash } from "@eolib/encrypt/server-verification-utils.js";
 
+import { describe, it, expect } from "vitest";
+
 const TEST_DATA = [
   { challenge: 0, hash: 114000 },
   { challenge: 1, hash: 115191 },

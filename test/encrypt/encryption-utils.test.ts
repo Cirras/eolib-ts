@@ -6,6 +6,8 @@ import {
 } from "@eolib/encrypt/encryption-utils.js";
 import { encode1252 } from "@eolib/data/windows-1252.js";
 
+import { describe, it, expect } from "vitest";
+
 describe("interleave()", function () {
   const TEST_DATA = [
     {

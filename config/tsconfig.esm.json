@@ -1,5 +1,6 @@
 {
   "extends": "../tsconfig.json",
+  "exclude": ["../test/**/*"],
   "compilerOptions": {
     "module": "ESNext",
     "moduleResolution": "NodeNext",

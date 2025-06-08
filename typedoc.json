@@ -3,5 +3,6 @@
   "entryPoints": ["./src/index.ts"],
   "includeVersion": true,
   "excludeInternal": true,
-  "treatWarningsAsErrors": true
+  "treatWarningsAsErrors": true,
+  "skipErrorChecking": true
 }

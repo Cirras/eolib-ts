@@ -1,5 +1,5 @@
 {
-  "include": ["src/**/*", "generated/**/*"],
+  "include": ["src/**/*", "generated/**/*", "test/**/*"],
   "rootDirs": ["src", "generated"],
   "compilerOptions": {
     "lib": ["ES6", "DOM"],

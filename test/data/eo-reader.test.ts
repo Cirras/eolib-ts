@@ -1,6 +1,8 @@
 import { EoReader } from "@eolib/data/eo-reader.js";
 import { encode1252 } from "@eolib/data/windows-1252.js";
 
+import { describe, it, expect } from "vitest";
+
 describe("EoReader", () => {
   describe("#slice()", () => {
     it("should return a reader at the specified offset and length", () => {

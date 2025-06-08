@@ -1,5 +1,7 @@
 import { encode1252, decode1252 } from "@eolib/data/windows-1252";
 
+import { describe, it, expect } from "vitest";
+
 describe("encode1252", () => {
   it("encodes ASCII characters (0x00-0x7F)", () => {
     expect(encode1252("\u0000abc123\u007F")).toEqual(

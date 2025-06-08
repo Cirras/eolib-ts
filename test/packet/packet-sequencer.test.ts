@@ -1,6 +1,8 @@
 import { AccountReplySequenceStart } from "@eolib/packet/account-reply-sequence-start.js";
 import { PacketSequencer } from "@eolib/packet/packet-sequencer.js";
 
+import { describe, it, expect } from "vitest";
+
 describe("PacketSequencer", () => {
   describe("#nextSequence()", () => {
     it("should increase the counter 9 times and then wrap around", () => {

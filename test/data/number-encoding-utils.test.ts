@@ -3,6 +3,8 @@ import {
   encodeNumber,
 } from "@eolib/data/number-encoding-utils.js";
 
+import { describe, it, expect } from "vitest";
+
 const TEST_DATA = [
   { decoded: 0, encoded: [0x01, 0xfe, 0xfe, 0xfe] },
   { decoded: 1, encoded: [0x02, 0xfe, 0xfe, 0xfe] },
