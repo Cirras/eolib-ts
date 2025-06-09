@@ -1,5 +1,3 @@
-import { AbstractSequenceStart } from "./abstract-sequence-start.js";
-
 /**
  * A value sent by the server to update the client's sequence start, also known as the "starting
  * counter ID".
@@ -24,8 +22,8 @@ export namespace SequenceStart {
   }
 }
 
-class ZeroSequenceStart extends AbstractSequenceStart {
-  public constructor() {
-    super(0);
+class ZeroSequenceStart implements SequenceStart {
+  public get value(): number {
+    return 0;
   }
 }
