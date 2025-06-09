@@ -1,8 +1,8 @@
 import { tryParseInt } from "../util/number-utils";
 
 export class Length {
-  private _string: string;
-  private _integer: number;
+  private readonly _string: string;
+  private readonly _integer: number;
 
   private constructor(lengthString: string | null) {
     this._string = lengthString;

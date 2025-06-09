@@ -20,20 +20,20 @@ import { ObjectCodeGenerator } from "./object-code-generator";
 import { CodeBlock } from "./code-block";
 
 export class ProtocolCodeGenerator {
-  private inputRoot: string;
+  private readonly inputRoot: string;
+  private readonly protocolFiles: XmlElement[];
+  private readonly exports: string[];
+  private readonly packetPaths: Map<XmlElement, string>;
+  private readonly typeFactory: TypeFactory;
   private outputRoot: string;
-  private protocolFiles: XmlElement[];
-  private exports: string[];
-  private packetPaths: Map<XmlElement, string>;
-  private typeFactory: TypeFactory;
 
   public constructor(inputRoot: string) {
     this.inputRoot = inputRoot;
-    this.outputRoot = null;
     this.protocolFiles = [];
     this.exports = [];
     this.packetPaths = new Map();
     this.typeFactory = new TypeFactory();
+    this.outputRoot = null;
   }
   public generate(outputRoot: string): void {
     this.outputRoot = outputRoot;

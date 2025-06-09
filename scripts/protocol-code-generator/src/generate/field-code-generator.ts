@@ -20,21 +20,21 @@ import {
 } from "./object-code-generator";
 
 class FieldCodeGenerator {
-  private typeFactory: TypeFactory;
-  private context: ObjectGenerationContext;
-  private data: ObjectGenerationData;
-  private name: string;
-  private typeString: string;
-  private lengthString: string;
-  private optional: boolean;
-  private padded: boolean;
-  private hardcodedValue: string;
-  private comment: string;
-  private arrayField: boolean;
-  private delimited: boolean;
-  private trailingDelimiter: boolean;
-  private lengthField: boolean;
-  private offset: number;
+  private readonly typeFactory: TypeFactory;
+  private readonly context: ObjectGenerationContext;
+  private readonly data: ObjectGenerationData;
+  private readonly name: string;
+  private readonly typeString: string;
+  private readonly lengthString: string;
+  private readonly optional: boolean;
+  private readonly padded: boolean;
+  private readonly hardcodedValue: string;
+  private readonly comment: string;
+  private readonly arrayField: boolean;
+  private readonly delimited: boolean;
+  private readonly trailingDelimiter: boolean;
+  private readonly lengthField: boolean;
+  private readonly offset: number;
 
   constructor(
     typeFactory: TypeFactory,

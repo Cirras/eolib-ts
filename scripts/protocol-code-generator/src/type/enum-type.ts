@@ -2,10 +2,10 @@ import { CustomType } from "./custom-type";
 import { IntegerType } from "./integer-type";
 
 export class EnumType implements CustomType {
-  private _name: string;
-  private _sourcePath: string;
-  private _underlyingType: IntegerType;
-  private _values: EnumValue[];
+  private readonly _name: string;
+  private readonly _sourcePath: string;
+  private readonly _underlyingType: IntegerType;
+  private readonly _values: EnumValue[];
 
   public constructor(
     name: string,
@@ -59,8 +59,8 @@ export class EnumType implements CustomType {
 }
 
 export class EnumValue {
-  private _ordinalValue: number;
-  private _name: string;
+  private readonly _ordinalValue: number;
+  private readonly _name: string;
 
   public constructor(ordinalValue: number, name: string) {
     this._ordinalValue = ordinalValue;

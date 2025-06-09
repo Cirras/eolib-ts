@@ -4,7 +4,7 @@ import { CustomType } from "../type/custom-type";
 import { pascalCaseToKebabCase } from "../util/name-utils";
 
 export class CodeBlock {
-  private imports: Set<string>;
+  private readonly imports: Set<string>;
   private lines: string[];
   private indentation: number;
 

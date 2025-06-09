@@ -1,10 +1,10 @@
 import { CustomType } from "./custom-type";
 
 export class StructType implements CustomType {
-  private _name: string;
-  private _fixedSize: number | null;
-  private _bounded: boolean;
-  private _sourcePath: string;
+  private readonly _name: string;
+  private readonly _fixedSize: number | null;
+  private readonly _bounded: boolean;
+  private readonly _sourcePath: string;
 
   public constructor(
     name: string,

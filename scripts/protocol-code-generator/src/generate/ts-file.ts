@@ -3,8 +3,8 @@ import * as path from "path";
 import { CodeBlock } from "./code-block";
 
 export class TSFile {
-  private relativePath: string;
-  private codeBlock: CodeBlock;
+  private readonly relativePath: string;
+  private readonly codeBlock: CodeBlock;
 
   public constructor(relativePath: string, codeBlock: CodeBlock) {
     this.relativePath = relativePath;
