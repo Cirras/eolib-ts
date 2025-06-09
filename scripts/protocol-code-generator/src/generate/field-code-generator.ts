@@ -324,10 +324,8 @@ class FieldCodeGenerator {
 
     if (this.arrayField) {
       const tsName = snakeCaseToCamelCase(this.name);
-      let arraySizeExpression = this.getLengthExpression();
-      if (arraySizeExpression === null) {
-        arraySizeExpression = `data._${tsName}.length`;
-      }
+      const arraySizeExpression =
+        this.getLengthExpression() ?? `data._${tsName}.length`;
 
       this.data.serialize.beginControlFlow(
         `for (let i = 0; i < ${arraySizeExpression}; ++i)`,

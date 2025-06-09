@@ -80,9 +80,7 @@ export class TypeFactory {
         result = new IntegerType(name, 4);
         break;
       case "bool":
-        if (underlyingType === null) {
-          underlyingType = this.getType("char") as IntegerType;
-        }
+        underlyingType ??= this.getType("char") as IntegerType;
         result = new BoolType(underlyingType);
         break;
       case "string":
