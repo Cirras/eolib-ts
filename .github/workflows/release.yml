@@ -11,6 +11,9 @@ concurrency:
 jobs:
   publish-npm:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -26,7 +29,7 @@ jobs:
       - name: Publish package
         run: |
           npm ci
-          npm publish
+          npm publish --provenance
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
 
