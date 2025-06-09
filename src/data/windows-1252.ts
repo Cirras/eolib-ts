@@ -60,7 +60,7 @@ export function decode1252(bytes: Uint8Array): string {
   let result = "";
   for (const byte of bytes) {
     let code: number;
-    if (byte < 0x80 || (byte >= 0xa0 && byte <= 0xff)) {
+    if (byte < 0x80 || byte > 0x9f) {
       code = byte;
     } else {
       code = WIN1252_TABLE[byte - 0x80];
