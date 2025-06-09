@@ -51,6 +51,7 @@
   "devDependencies": {
     "@babel/plugin-transform-modules-commonjs": "^7.27.1",
     "@rgrove/parse-xml": "^4.2.0",
+    "@types/node": "^22.15.30",
     "@vitest/coverage-istanbul": "^3.2.2",
     "@vitest/ui": "^3.2.2",
     "chalk": "^5.4.1",
