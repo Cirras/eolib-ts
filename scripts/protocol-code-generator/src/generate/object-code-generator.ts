@@ -314,7 +314,6 @@ export class ObjectCodeGenerator {
 
     const protocolCases: XmlElement[] = protocolSwitch.children
       .filter((child) => child instanceof XmlElement)
-      .map((child) => child as XmlElement)
       .filter((child) => child.name === "case");
 
     switchCodeGenerator.generateCaseDataInterface(protocolCases);

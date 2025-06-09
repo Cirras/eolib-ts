@@ -174,7 +174,6 @@ export class ProtocolCodeGenerator {
 
     protocolEnum.children
       .filter((child) => child instanceof XmlElement)
-      .map((child) => child as XmlElement)
       .filter((child) => child.name === "value")
       .forEach((protocolValue) => {
         const valueName = getRequiredStringAttribute(protocolValue, "name");
